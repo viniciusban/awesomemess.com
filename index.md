@@ -5,9 +5,9 @@
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 #
 layout: default
-title: Vinicius Assef (viniciusban) | Software developer
+title: awesome mess | it is what we usually do
 taglines:
-  - i have much more questions than answers
+  - have more questions than answers
   - name things properly
   - take care of your knees
   - programming is fun, but shipping is your job
