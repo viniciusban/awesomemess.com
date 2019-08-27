@@ -5,7 +5,7 @@
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 #
 layout: default
-title: awesome mess | it is what we usually do
+title: It is what we usually do
 taglines:
   - have more questions than answers
   - name things properly
