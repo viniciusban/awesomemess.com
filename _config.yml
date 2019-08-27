@@ -20,9 +20,6 @@ social:
 # THEME SETTINGS
 navigation: # Navigation links
   - {name: 'Home', link: '/'}
-  - {name: 'About', link: '/about'}
-  - {name: 'Categories', link: '/categories'}
-  - {name: 'Contact', link: '/contact'}
 
 tagline: >
   i have much more questions than answers
