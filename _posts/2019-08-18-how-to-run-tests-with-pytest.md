@@ -8,23 +8,22 @@ categories: [english]
 
 I always forget how to run `pytest` for a specific target. So, here it goes.
 
-For paths:
+Pytest accepts two types of target: path (file/directory) and package/module.
 
-```
-$ pytest some/directory
-$ pytest path/to/file.py
-$ pytest path/to/file.py::test_function
-$ pytest path/to/file.py::SomeClass
-$ pytest path/to/file.py::SomeClass::test_method
-```
+The command to run varies according to the choice:
 
-For packages and/or modules:
+| For paths | For packages or modules |
+|-----------|-------------------------|
+| `$ pytest <target>` | `$ pytest --pyargs <target>` |
 
-```
-$ pytest --pyargs some.package  # a.k.a directory
-$ pytest --pyargs some.package.module  # a.k.a file
-$ pytest --pyargs some.package.module::test_function
-$ pytest --pyargs some.package.module::SomeClass
-$ pytest --pyargs some.package.module::SomeClass::test_method
-```
+
+The `<target>` argument varies too:
+
+| For paths | For packages or modules |
+|-----------|-------------------------|
+| `some/test_directory` | `some.test_package` |
+| `path/to/test_file.py` | `some.package.test_module` |
+| `path/to/test_file.py::test_function` | `some.package.test_module::test_function` |
+| `path/to/test_file.py::TestCase`     | `some.package.test_module::TestCase` |
+| `path/to/test_file.py::TestCase::test_method` | `some.package.test_module::TestCase::test_method` |
 
