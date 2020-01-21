@@ -66,8 +66,9 @@ npm install --global gulp-cli
 ```
 cd <repo>
 gem install bundler -v '~>1.12'
-bundle _1.12_ install
-gem uninstall bundler -v 2.0.2
+gem list bundler
+bundle _1.17.3_ install  # install the 1.xx.y version
+gem uninstall bundler -v 2.1.2  # uninstall the 2.xx.y version
 bundle install
 sudo apt install -y python
 npm install
@@ -77,10 +78,14 @@ npm install node-sass
 ## Running jekyll
 
 ```
-bundle exec jekyll serve --host 0.0.0.0
+bundle exec jekyll build && bundle exec jekyll serve --host 0.0.0.0 --no-watch
 ```
 
+Now go to http://<vm-ip>:4000/
+
 ## Generating multi-sizes images
+
+Run this whenever you add a new image to `_img/posts/` directory.
 
 ```
 gulp img
