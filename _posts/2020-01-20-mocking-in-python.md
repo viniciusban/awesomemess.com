@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Mocking in Python
-summary: A how-to approach to straight use of the Python's mocking library.
+summary: An "I want to" approach to straight use of the Python's mocking library.
 featured-img: eyeglasses
 categories: [english]
 ---
