@@ -6,41 +6,45 @@ featured-img: eyeglasses
 categories: [english]
 ---
 
-In this article about Python's built-in `unittest.mock` library, I address my personal needs in a very practical way to handle mocking in Python, guided by questions I usually make when I want to write tests and use mock objects.
+In this article about Python's built-in `unittest.mock` library, I address my personal needs in a very practical way to handle mocking in Python. It is guided by, and based on questions that usually arise when I am writing tests that use mock objects.
 
-When we talk about mocks, we are really talking about doubles. In the cinema industry, doubles are people who risk their lives in dangerous takes to preserve the famous actor. If a double get hurt the audience won't feel anything because the star artist will continue appearing in the movie and attending interviews. So, a double is someone who preserves the "actual" artist.
+When we talk about mocks, we are really talking about "stunt doubles". In the cinema industry, they are people who replace the main actors in risky scenes. If a stunt double gets hurt, the audience will not perceive that an accident has occured, because the original actor will continue appearing in the movie consistently. Therefore, a stunt double is someone who preserves the “actual” actor.
 
-In automated testing techniques we have a wide range of names to specify doubles. Martin Fowler's great article [Mocks aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs) clarifies this grey field. I suggest you read it and come back here, if you are unfamiliar with the difference between dummy, fake, stub, spy and mock.
+In automated testing techniques, "stunt doubles" are also very welcome. They help us to test some functionality (class method or function), playing a secondary but important role. They can be known by different names, according to the role the play in each moment.
 
-As you now understood (or already knew about) test doubles, we can say in a nutshell, when testing you usually do:
+If you are unfamiliar with the differences between dummy, fake, stub, spy and mock (all names for test doubles), I suggest you read a great article by Martin Fowler, [Mocks aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs).
 
-1. Ignore some class or method used by your code under test;
+Usually, test doubles are helpful to:
+
+1. Ignore some class or method used by your code under test, but unimportant in some test;
 2. Configure what a specific method returns;
 3. Check how some method was called by the code under test.
 
-We go through these topics, but first I will introduce the simple Python class we will use for all code examples here:
+We will approach all these topics, but first I need to introduce a very simple Python class that we will use in all code examples here:
 
 ```
 class A:
     def f(self):
-        return "original f()"
+        return "The real f()"
 
     def g(self):
-        return "original g()"
+        return "The real g()"
 ```
 
-All implementations will use it to demonstrate how to handle mocking in Python.
+All tests will use it to show you how to manage mocking in Python.
 
-It is important to state I consider you already know the basics of the `unittest.mock` library. So, I do not touch [where to patch](https://docs.python.org/3.7/library/unittest.mock.html#where-to-patch) here.
+It is important to say we will not discuss how to use `unittest.mock`. Instead, we will focus on the situations a test double is useful and how to involve them in action.
 
-Then, let's get started.
+Thus, let's get started.
 
 
 ## I want to ignore the real thing
 
-I don't want to see the work of some real class, probably because it touches the database, or it accesses an external API, or it does something unimportant to this test case.
+We can use a test double to replace some production code we don't want it running for some reason. Maybe because it touches the database, or it accesses an external API. Whatever the reason, the real code must not run. So, test double for the rescue!
 
-Also, I don't want to know anything about what the production code did with it, nor set any return value from its methods. I really just want nothing to be done when it's called.
+When the code under test calls our test double (a "dummy", in this case), no error will happen. This kind of test double is useful to fill some required argument, or to replace some function we use, but isn't important for this very test.
+
+If that replaced code returns some value, we must not care about it. The only behaviour we aim is: do not show any error. It must not be perceived.
 
 Solution: We want a dummy implementation. Just `patch` the class and forget it.
 
