@@ -10,7 +10,7 @@ In this text about Python's built-in `unittest.mock` library, I address my perso
 
 When we talk about mocks, we are actually talking about "stunt doubles". They work in movies, replacing the main actors in dangerous scenes and usually look like them. If a stunt double gets hurt, the audience will not perceive that an accident has occurred, because the original actor will continue appearing in the movie consistently. Therefore, a stunt double is someone who replaces and preserves the “actual” actor.
 
-We also appreciate stunt doubles in automated software tests. We call them "test doubles". They help us test features (class method or function), playing important roles. Depending what they do in each situation, we call them by different aliases: dummy, fake, stub, spy or mock. If you are unfamiliar with this classification, I suggest you read a great text by Martin Fowler, [Mocks aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs).
+Stunt doubles are very present in automated software tests, too. Here, we call them "test doubles". They help us test features (class method or function), playing important roles. Depending on what they do in each situation, we call them by different aliases: dummy, fake, stub, spy or mock. If you are unfamiliar with this classification, I suggest you read a great text by Martin Fowler, [Mocks aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs).
 
 Usually, test doubles are helpful to:
 
