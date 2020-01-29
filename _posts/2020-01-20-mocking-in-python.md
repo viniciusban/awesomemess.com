@@ -31,22 +31,22 @@ class A:
 
 All tests will use it to demonstrate how to handle mocking in Python.
 
-It is important to say we will not discuss how to use `unittest.mock`. Instead, we will focus on the situations a test double is useful and how to involve them in action.
+It is important to say we will not discuss how to use `unittest.mock`, neither its syntax. Instead, we will focus on the situations a test double is useful and how to involve them in action.
 
 Thus, let's get started.
 
 
 ## I want to ignore the real thing
 
-We can use a test double to replace some production code we don't want it running for some reason. Maybe because it touches the database, or it accesses an external API. Whatever the reason, the real code must not run. So, test double for the rescue!
+We can use a test double to replace some production code we don't want running for some reason. Maybe because it touches the database, or it accesses an external API. Whatever the reason, the real code must not run. So, let's call a test double to replace him.
 
-When the code under test calls our test double (a "dummy", in this case), no error will happen. This kind of test double is useful to fill some required argument, or to replace some function we use, but isn't important for this very test.
+When the code under test (the one we are actually testing) calls our test double, no error will happen. No exception will be raised. No access to some external module. No printed message. None. Void. This test double is the right one to fill required arguments or to replace a function used by the main code, which is not important in this situation.
 
-If that replaced code returns some value, we must not care about it. The only behaviour we aim is: do not show any error. It must not be perceived.
+If that replaced code returns some value, we must not care about it. The only behaviour we want for the test double is: do nothing. It must not be perceived. It is only an extra.
 
 Solution: We want a dummy implementation. Just `patch` the class and forget it.
 
-Tip: pass the `new` argument to avoid poluting the parameters list unecessarily.
+Tip: pass the `new` argument, to avoid poluting the parameters list for no reason.
 
 ```
 # As a decorator
