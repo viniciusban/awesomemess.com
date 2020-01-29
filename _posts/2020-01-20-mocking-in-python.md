@@ -44,7 +44,7 @@ When the code under test (the one we are actually testing) calls our test double
 
 If that replaced code returns some value, we must not care about it. The only behaviour we want for the test double is: do nothing. It must not be perceived. It is only an extra.
 
-Solution: We want a dummy implementation. Just `patch` the class and forget it.
+Solution: We want a dummy implementation. Just `patch` the class or the function and forget it. In our example below we patch the class.
 
 Tip: pass the `new` argument, to avoid poluting the parameters list for no reason.
 
