@@ -8,11 +8,9 @@ categories: [english]
 
 In this article about Python's built-in `unittest.mock` library, I address my personal needs in a very practical way to handle mocking in Python. It is guided by, and based on questions that usually arise when I am writing tests that use mock objects.
 
-When we talk about mocks, we are really talking about "stunt doubles". In the cinema industry, they are people who replace the main actors in risky scenes. If a stunt double gets hurt, the audience will not perceive that an accident has occurred, because the original actor will continue appearing in the movie consistently. Therefore, a stunt double is someone who preserves the “actual” actor.
+When we talk about mocks, we are really talking about "stunt doubles". They work in movies, replacing the main actors in dangerous scenes and usually look like them. If a stunt double gets hurt, the audience will not perceive that an accident has occurred, because the original actor will continue appearing in the movie consistently. Therefore, a stunt double is someone who replaces and preserves the “actual” actor.
 
-We also appreciate stunt doubles in automated software tests. We call them "test doubles". They help us test some functionality (class method or function), playing a secondary but important role. They are known by different aliases, depending on the role the play in a given moment.
-
-If you are unfamiliar with the differences between: dummy, fake, stub, spy and mock (all aliases for test doubles), I suggest you read a great article by Martin Fowler, [Mocks aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs).
+We also appreciate stunt doubles in automated software tests. We call them "test doubles". They help us test features (class method or function), playing important roles. Depending what they do in each situation, we call them by different aliases: dummy, fake, stub, spy or mock. If you are unfamiliar with this classification, I suggest you read a great article by Martin Fowler, [Mocks aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs).
 
 Usually, test doubles are helpful to:
 
