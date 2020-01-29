@@ -6,11 +6,11 @@ featured-img: eyeglasses
 categories: [english]
 ---
 
-In this article about Python's built-in `unittest.mock` library, I address my personal needs in a very practical way to handle mocking in Python. It is guided by, and based on questions that usually arise when I am writing tests that use mock objects.
+In this text about Python's built-in `unittest.mock` library, I address my personal needs in a very practical way to handle mocking in Python. It is guided by, and based on questions that usually arise when I am writing tests that use mock objects.
 
-When we talk about mocks, we are really talking about "stunt doubles". They work in movies, replacing the main actors in dangerous scenes and usually look like them. If a stunt double gets hurt, the audience will not perceive that an accident has occurred, because the original actor will continue appearing in the movie consistently. Therefore, a stunt double is someone who replaces and preserves the “actual” actor.
+When we talk about mocks, we are actually talking about "stunt doubles". They work in movies, replacing the main actors in dangerous scenes and usually look like them. If a stunt double gets hurt, the audience will not perceive that an accident has occurred, because the original actor will continue appearing in the movie consistently. Therefore, a stunt double is someone who replaces and preserves the “actual” actor.
 
-We also appreciate stunt doubles in automated software tests. We call them "test doubles". They help us test features (class method or function), playing important roles. Depending what they do in each situation, we call them by different aliases: dummy, fake, stub, spy or mock. If you are unfamiliar with this classification, I suggest you read a great article by Martin Fowler, [Mocks aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs).
+We also appreciate stunt doubles in automated software tests. We call them "test doubles". They help us test features (class method or function), playing important roles. Depending what they do in each situation, we call them by different aliases: dummy, fake, stub, spy or mock. If you are unfamiliar with this classification, I suggest you read a great text by Martin Fowler, [Mocks aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs).
 
 Usually, test doubles are helpful to:
 
@@ -29,7 +29,7 @@ class A:
         return "The real g()"
 ```
 
-All tests will use it to demonstrate how to handle mocking in Python.
+All examples in this essay will use it to demonstrate how to handle mocking in Python.
 
 It is important to say we will not discuss how to use `unittest.mock`, neither its syntax. Instead, we will focus on the situations a test double is useful and how to involve them in action.
 
