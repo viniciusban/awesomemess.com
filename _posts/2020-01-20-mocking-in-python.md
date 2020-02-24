@@ -6,19 +6,37 @@ featured-img: eyeglasses
 categories: [english]
 ---
 
-In this text about Python's built-in `unittest.mock` library, I address my personal needs in a very practical way to handle mocking in Python. It is guided by, and based on questions that usually arise when I am writing tests that use mock objects.
+In this text about Python's built-in `unittest.mock` library, I address my
+personal needs in a very practical way to handle mocking in Python. It is
+guided by, and based on questions that usually arise when I am writing tests
+that use mock objects.
 
-When we talk about mocks, we are actually talking about "stunt doubles". They work in movies, replacing the main actors in dangerous scenes and usually look like them. If a stunt double gets hurt, the audience will not perceive that an accident has occurred, because the original actor will continue appearing in the movie consistently. Therefore, a stunt double is someone who replaces and preserves the “actual” actor.
+When we talk about mocks, we are actually talking about "stunt doubles". They
+work in movies, replacing the main actors in dangerous scenes and usually look
+like them. If a stunt double gets hurt, the audience will not perceive that an
+accident has occurred, because the original actor will continue appearing in
+the movie consistently. Therefore, a stunt double is someone who replaces and
+preserves the “actual” actor.
 
-Stunt doubles are very present in automated software tests, too. Here, we call them "test doubles". They help us test features (class method or function), playing important roles. Depending on what they do in each situation, we call them by different aliases: dummy, fake, stub, spy or mock. If you are unfamiliar with this classification, I suggest you read a great text by Martin Fowler, [Mocks aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs).
+Stunt doubles are very present in automated software tests, too. Here, we call
+them "test doubles". They help us test features (class method or function),
+playing important roles. Depending on what they do in each situation, we call
+them by different aliases: dummy, fake, stub, spy or mock. If you are
+unfamiliar with this classification, I suggest you read a great text by Martin
+Fowler, [Mocks aren't
+Stubs](https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs).
 
 Usually, test doubles are helpful to:
 
-1. Ignore some class or method used by your code under test, but unimportant in some test;
+1. Ignore some class or method used by your code under test, but unimportant in
+   some test;
+
 2. Configure what a specific method returns;
+
 3. Check if a method was called by the code under test.
 
-We will address all these topics, but first it is necessary to see a very simple Python class that we will use in the code examples below:
+We will address all these topics, but first it is necessary to see a very
+simple Python class that we will use in the code examples below:
 
 ```
 class A:
@@ -29,24 +47,38 @@ class A:
         return "The real g()"
 ```
 
-All examples in this essay will use the code above to demonstrate how to handle mocking in Python.
+All examples in this essay will use the code above to demonstrate how to handle
+mocking in Python.
 
-It is important to say we will not discuss how to use `unittest.mock` and its syntax. Instead, we will focus on the situations a test double is useful in and how to involve them in action.
+It is important to say we will not discuss how to use `unittest.mock` and its
+syntax. Instead, we will focus on the situations a test double is useful in and
+how to involve them in action.
 
 Let's get started.
 
 
 ## I want to ignore the real thing
 
-We can use a test double to replace a production code we don't want to run. Maybe because it touches the database, or it accesses an external API. Whatever the reason, the real code must not run. So, let's use a test double to replace it.
+We can use a test double to replace a production code we don't want to run.
+Maybe because it touches the database, or it accesses an external API. Whatever
+the reason, the real code must not run. So, let's use a test double to replace
+it.
 
-When the code under test (the one we are actually testing) calls our test double, no error will occur. No exception will be raised. No access to some external module. No printed message. None. Void. This test double is the right one to fill required arguments or to replace a function used by the main code, which is not important in this situation.
+When the code under test (the one we are actually testing) calls our test
+double, no error will occur. No exception will be raised. No access to some
+external module. No printed message. None. Void. This test double is the right
+one to fill required arguments or to replace a function used by the main code,
+which is not important in this situation.
 
-If that replaced code returns some value, we must not care about it. The only behaviour we want for the test double is: do nothing. It must not be perceived. It is only an extra.
+If that replaced code returns some value, we must not care about it. The only
+behaviour we want for the test double is: do nothing. It must not be perceived.
+It is only an extra.
 
-Solution: We want a dummy implementation. Just `patch` the class or the function and forget it. In our example below we patch the class.
+Solution: We want a dummy implementation. Just `patch` the class or the
+function and forget it. In our example below we patch the class.
 
-Tip: pass the `new` argument, to avoid poluting the parameters list for no reason.
+Tip: pass the `new` argument, to avoid poluting the parameters list for no
+reason.
 
 ```
 # As a decorator
@@ -77,11 +109,14 @@ print ("Back to the originals:", (A().f(), A().g()), end="\n\n")
 
 ## I want to have control over the real thing
 
-The production code I want to exercise uses a method from a class, but I want to determine what it responds to have a constant output and idempotent tests.
+The production code I want to exercise uses a method from a class, but I want
+to determine what it responds to have a constant output and idempotent tests.
 
-This class has other methods and properties I don't care about in this test, but I want to focus only in this specific method.
+This class has other methods and properties I don't care about in this test,
+but I want to focus only in this specific method.
 
-Solution: We want a Stub, i.e., a canned response to calls. Patch the specific method, receive it in the parameters list and set its `return_value`.
+Solution: We want a Stub, i.e., a canned response to calls. Patch the specific
+method, receive it in the parameters list and set its `return_value`.
 
 ```
 # Patch the method, receive it as a parameter and set a return_value.
@@ -97,7 +132,9 @@ a()
 print ("Back to the originals:", (A().f(), A().g()))
 ```
 
-The solution above handles the patching of only one method. But if you want to control more than one, I suggest you to patch the entire class and set a `return_value` for each of the methods we want to control.
+The solution above handles the patching of only one method. But if you want to
+control more than one, I suggest you to patch the entire class and set a
+`return_value` for each of the methods we want to control.
 
 ```
 # Patch the entire class, receive it as a parameter and set a
@@ -117,7 +154,9 @@ a()
 print ("Back to the originals:", (A().f(), A().g()))
 ```
 
-Back to the one-method scenario, if you have several consecutive calls to the method you want to control, and each call should return a different value, you should set the `side_effect` property with a list of values.
+Back to the one-method scenario, if you have several consecutive calls to the
+method you want to control, and each call should return a different value, you
+should set the `side_effect` property with a list of values.
 
 ```
 # Patch the method, receive it as parameter and set a side_effect to
@@ -136,7 +175,8 @@ a()
 print ("Back to the originals:", (A().f(), A().g()))
 ```
 
-Yet another similar situation is when you need to force an exception. To get there, set `side_effect` again.
+Yet another similar situation is when you need to force an exception. To get
+there, set `side_effect` again.
 
 ```
 # Patch the method, receive it as a parameter and set a side_effect
@@ -162,7 +202,9 @@ print ("Back to the originals:", (A().f(), A().g()))
 
 I want to check how the production code called some method(s) of this class.
 
-Solution: We want a Spy to inspect how things are done under the ground. Patch the specific method or the entire class, receive it in the parameters list and check how it was called.
+Solution: We want a Spy to inspect how things are done under the ground. Patch
+the specific method or the entire class, receive it in the parameters list and
+check how it was called.
 
 ```
 # Patch the method, receive it as a parameter and inspect how it
@@ -194,7 +236,8 @@ a()
 print ("Back to the originals:", (A().f(), A().g()))
 ```
 
-I want to know if some argument was passed to the method, despite the other arguments.
+I want to know if some argument was passed to the method, despite the other
+arguments.
 
 ```
 # Patch the entire class, receive it as a parameter and inspect
@@ -219,4 +262,6 @@ a()
 print ("Back to the originals:", (A().f(), A().g()))
 ```
 
-That's it. These are the most common uses for the `unittest.mock` library. Obviously I left out many topics about mocking in Python, but surely you can find excelent resources about them in the internet.
+That's it. These are the most common uses for the `unittest.mock` library.
+Obviously I left out many topics about mocking in Python, but surely you can
+find excelent resources about them in the internet.
