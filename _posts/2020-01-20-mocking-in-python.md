@@ -90,6 +90,13 @@ Tip: filling the `new` argument in `mock.patch()` avoids receiving the mocked ob
 
 
 
+
+Note: This is a work in progress. Everything below this point will be revisited and rewritten. Come back soon.
+
+---
+
+
+
 ## I want to have control over the real thing
 
 The production code I want to exercise uses a method from a class, but I want
