@@ -47,7 +47,7 @@ taglines:
   - Documentation is a love letter that you write to your future self — Damian Conway
   - Those hours of practice, and failure, are a necessary part of the learning process — Gina Sipley
   - The only way to learn a new programming language is by writing programs in it — Dennis Ritchie
-  - Learning to break down problems into smaller pieces is one of the most important skills in computer science and life(Addy Osmani
+  - Learning to break down problems into smaller pieces is one of the most important skills in computer science and life — Addy Osmani
   - The trick is to fix the problem you have, rather than the problem you want — Bram Cohen
   - Be curious. Read widely. Try new things. I think a lot of what people call intelligence boils down to curiosity — Aaron Swartz
   - Sometimes the problem is to discover what the problem is  — Gordon Glegg
