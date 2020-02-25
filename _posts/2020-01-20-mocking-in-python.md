@@ -6,105 +6,90 @@ featured-img: eyeglasses
 categories: [english]
 ---
 
-In this text about Python's built-in `unittest.mock` library, I address my
-personal needs in a very practical way to handle mocking in Python. It is
-guided by, and based on questions that usually arise when I am writing tests
-that use mock objects.
+In this text about Python's built-in `unittest.mock` library, I address my personal needs in a very practical way to handle mocking in Python.  It is guided by, and based on questions that usually come to myself when I am writing tests that need to use test doubles.
 
-When we talk about mocks, we are actually talking about "stunt doubles". They
-work in movies, replacing the main actors in dangerous scenes and usually look
-like them. If a stunt double gets hurt, the audience will not perceive that an
-accident has occurred, because the original actor will continue appearing in
-the movie consistently. Therefore, a stunt double is someone who replaces and
-preserves the “actual” actor.
 
-Stunt doubles are very present in automated software tests, too. Here, we call
-them "test doubles". They help us test features (class method or function),
-playing important roles. Depending on what they do in each situation, we call
-them by different aliases: dummy, fake, stub, spy or mock. If you are
+## Behind the names
+
+Due to the variety of names in this subject and to avoid misunderstanding, it is necessary to remember an already established convention, as it follows.
+
+**Code under test** is our target, i.e., the code we want to test. It normally is a method or a function.
+
+**Test case** is the code we write to run the code under test and make assertions about its behaviour or its result. For instance, to check if the `apply_discount_on_first_order()` function decreased the price as expected.
+
+**Collaborator code** is any code to support the code under test. It may be a class, a method or a function. Sometimes it is replaced by a test double (more on this in a few paragraphs).
+
+Code under test and Collaborator code are the **Production code**, i.e., the code that will run in production.
+
+**Test double** is a "stunt double" replacing collaborator code in a test case.
+
+All above names are self-explanatory to somebody writing tests, except the **Test double**. Being so, keep reading to understand a bit more about it and its importance to tests.
+
+In the cinema, stunt doubles usually look like the main actors and their work is to replace those actors in some scenes. Stunt doubles exist to protect the main actors from stunts or to accomplish some performance they are not capable of. Somehow, a **Test double** works alike, but it only replaces the "actor" during the test phase; never in production.
+
+Since the roles of a test double can vary, several aliases were created to distinguish them, such as: _dummy_, _fake_, _stub_, _spy_, and _mock_. If you are
 unfamiliar with this classification, I suggest you read a great text by Martin
-Fowler, [Mocks aren't
-Stubs](https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs).
+Fowler, [Mocks aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs).
 
-Usually, test doubles are helpful to:
+As we now have all pieces named accordingly, we can jump into the useful scenarios to use test doubles in Python. But first, it is important to say we will not discuss how to use `unittest.mock` and its syntax. Instead, we will focus on the situations a test double is useful in and how it can help us to simplify tests.
 
-1. Ignore some class or method used by your code under test, but unimportant in
-   some test;
 
-2. Configure what a specific method returns;
+## I want a "do-nothing" replacement
 
-3. Check if a method was called by the code under test.
+In this example we will use a test double to replace a collaborator code with a "do-nothing" behaviour.
 
-We will address all these topics, but first it is necessary to see a very
-simple Python class that we will use in the code examples below:
+Suppose you want to test the function below:
 
 ```
-class A:
-    def f(self):
-        return "The real f()"
-
-    def g(self):
-        return "The real g()"
+def raise_salary(department, percentage):
+    """
+    Raise salary to employees working here for at least 15 years
+    """"
+    employees = Employees.filter_by(department=department)
+    for e in employees:
+        if e.start_date.year <= FIFTEEN_YEARS_AGO:
+            e.salary *= (1 + percentage)
+            Employees.save(e)
+            report_raised(e)
 ```
 
-All examples in this essay will use the code above to demonstrate how to handle
-mocking in Python.
+There are several scenarios we could build to test the above function, but here we will use only one of them as an example: assert who has been hired less than 15 years ago does not have their salary raised.
 
-It is important to say we will not discuss how to use `unittest.mock` and its
-syntax. Instead, we will focus on the situations a test double is useful in and
-how to involve them in action.
+To build this test scenario, we must:
 
-Let's get started.
+1. Populate the database with one employee hired less than 15 years ago;
+1. Call the code under test: the `raise_salary()` function;
+1. Check the employee keeps the same salary.
 
+Very straight, except by one detail: the code under test calls `report_raised()`, which is a collaborator function we do not want to handle, because it is not our focus now.
 
-## I want to ignore the real thing
+The situation: we must run the code under test, but `report_raised()` should not be called or, even if called, it should do nothing because it is not important to our current test.
 
-We can use a test double to replace a production code we don't want to run.
-Maybe because it touches the database, or it accesses an external API. Whatever
-the reason, the real code must not run. So, let's use a test double to replace
-it.
+The solution: we must replace `report_raised()` with a **dummy object**, i.e., a callable that does nothing.
 
-When the code under test (the one we are actually testing) calls our test
-double, no error will occur. No exception will be raised. No access to some
-external module. No printed message. None. Void. This test double is the right
-one to fill required arguments or to replace a function used by the main code,
-which is not important in this situation.
-
-If that replaced code returns some value, we must not care about it. The only
-behaviour we want for the test double is: do nothing. It must not be perceived.
-It is only an extra.
-
-Solution: We want a dummy implementation. Just `patch` the class or the
-function and forget it. In our example below we patch the class.
-
-Tip: pass the `new` argument, to avoid poluting the parameters list for no
-reason.
+The implementation: we can use `mock.patch()` as a decorator to replace `report_raised()` with a `mock.MagicMock` instance. By default, `MagicMock` instances do nothing when called. It is definitely what we need.
 
 ```
-# As a decorator
+import unittest
+from unittest import mock
 
-print ("Originals:", (A().f(), A().g()), end="\n\n")
+from repository import Employees
+from business_functions import raise_salary
 
-@mock.patch("__main__.A", new=mock.MagicMock())
-def a():
-    print ("Patched f():", A().f())
-    print ("Patched g():", A().g(), end="\n\n")
-
-a()
-print ("Back to the originals:", (A().f(), A().g()))
-
-
-
-# As a context processor
-
-print ("Originals:", (A().f(), A().g()), end="\n\n")
-
-with mock.patch("__main__.A"):
-    print ("Patched f():", A().f())
-    print ("Patched g():", A().g(), end="\n\n")
-
-print ("Back to the originals:", (A().f(), A().g()), end="\n\n")
+class TestRaiseSalary(unittest.TestCase):
+  @mock.patch("business_functions.report_raised", new=mock.MagicMock())
+  def test_must_keep_same_salary_if_hired_less_than_15years_ago(self):
+    sellers = "sellers"
+    e = Employees.create(employee_factory(
+      start_date=LAST_YEAR, department=sellers, salary=100.00
+    ))
+    raise_salary(sellers, 0.10)
+    same_e = Employees.get(id=e.id)
+    self.assertEqual(same_e.salary, 100.00)
 ```
+
+Tip: filling the `new` argument in `mock.patch()` avoids receiving the mocked object in your test case.
+
 
 
 ## I want to have control over the real thing
