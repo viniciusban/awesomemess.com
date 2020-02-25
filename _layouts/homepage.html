@@ -1,0 +1,61 @@
+---
+layout: compress
+---
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en-US" }}">
+
+  {% include head.html %}
+
+  <body class="site">
+
+    {% if site.google_tag_manager %}
+
+      <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.google_tag_manager }}"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <!-- End Google Tag Manager (noscript) -->
+
+    {% endif %}
+
+    {% include header.html %}
+
+    <div class="hero lazyload" data-bg="{{ site.url }}{{ site.baseurl }}/assets/img/{{ site.hero_img }}">
+      <div class="hero__wrap">
+        <h1 class="hero__homepage_title">{{ site.tagline }}</h1>
+        <p class="hero__meta">{{ site.title | escape }}</p>
+      </div>
+    </div>
+
+    <main class="site__content">
+      <section class="blog">
+        <div class="container">
+          <div class="post-list" itemscope="" itemtype="http://schema.org/Blog">
+
+            {% for post in site.posts %}
+              {% include card.html %}
+            {% endfor %}
+
+            <!-- {% include pagination.html %} -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    {% include footer.html %}
+
+	{% if page.taglines %}
+		<script>
+			var phrases = [
+				{% for phrase in page.taglines %}
+					"{{ phrase }}",
+				{% endfor %}
+			"", ];
+			var i = Math.floor(Math.random() * Math.floor(phrases.length-1));
+			el = document.querySelector(".hero__title");
+			el.innerHTML = phrases[i];
+		</script>
+	{% endif %}
+
+  </body>
+
+</html>
