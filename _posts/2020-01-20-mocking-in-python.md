@@ -59,13 +59,13 @@ To build this test scenario, we must:
 1. Call the code under test: the `raise_salary()` function;
 1. Check the employee keeps the same salary.
 
-Very straight, except by one detail: the code under test calls `report_raised()`, which is a collaborator function we do not want to handle, because it is not our focus now.
+Very straight, except by one detail: the code under test calls `report_raised()`, which is a collaborator function we do not want to run, because it is not important in this test.
 
-The situation: we must run the code under test, but `report_raised()` should not be called or, even if called, it should do nothing because it is not important to our current test.
+The situation: we have to run the code under test, but `report_raised()` should not be called or, even if called, it should do nothing.
 
-The solution: we must replace `report_raised()` with a **dummy object**, i.e., a callable that does nothing.
+The solution: we must replace `report_raised()` at run time with a callable that does nothing. A **dummy object**.
 
-The implementation: we can use `mock.patch()` as a decorator to replace `report_raised()` with a `mock.MagicMock` instance. By default, `MagicMock` instances do nothing when called. It is definitely what we need.
+The implementation: use `mock.patch()` as a decorator to replace `report_raised()` with a `mock.MagicMock` instance. By default, `MagicMock` instances do nothing when called. It is definitely what we need.
 
 ```
 import unittest
@@ -87,6 +87,8 @@ class TestRaiseSalary(unittest.TestCase):
 ```
 
 Tip: filling the `new` argument in `mock.patch()` avoids receiving the mocked object in your test case.
+
+And we are done. We could run the code under test without the side effect of running a non-desirable support function (`report_raised()`). We replaced it with a do-nothing callable, a **dummy object**.
 
 
 
