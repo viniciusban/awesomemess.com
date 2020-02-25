@@ -59,7 +59,7 @@ taglines:
   - \"Looking at code you wrote more than two weeks ago is like looking at code you are seeing for the first time\" (Dan Hurvitz)
   - \"Programming isn\'t about what you know; it\'s about what you can figure out\" (Chris Pine)
   - \"Any fool can write code that a computer can understand. Good programmers write code that humans can understand\" (Martin Fowler)
-  - \"Truth can only be found in one place: the code\" (Robert C. Martin)
+  - \"Truth can only be found in one place\: the code\" (Robert C. Martin)
   - \"The most important property of a program is whether it accomplishes the intention of its user\" (C.A.R. Hoare)
   - \"Always implement things when you actually need them, never when you just foresee that you need them\" (Ron Jeffries)
   - \"Any code of your own that you haven\'t looked at for six or more months might as well have been written by someone else\" (Eagleson\'s Law)
