@@ -21,8 +21,8 @@ layout: compress
 
     <div class="hero lazyload" data-bg="{{ site.url }}{{ site.baseurl }}/assets/img/{{ site.hero_img }}">
       <div class="hero__wrap">
-        <h1 class="hero__title">{{ site.title | escape }}</h1>
-        <p class="hero__meta">{{ site.tagline }}</p>
+        <h1 class="hero__title">{{ site.tagline }}</h1>
+        <p class="hero__meta">{{ site.title | escape }}</p>
       </div>
     </div>
 
@@ -51,7 +51,7 @@ layout: compress
 				{% endfor %}
 			"", ];
 			var i = Math.floor(Math.random() * Math.floor(phrases.length-1));
-			el = document.querySelector(".hero__meta");
+			el = document.querySelector(".hero__title");
 			el.innerHTML = phrases[i];
 		</script>
 	{% endif %}
