@@ -11,27 +11,25 @@ In this text about Python's built-in `unittest.mock` library, I address my perso
 
 ## Behind the names
 
-Due to the variety of names in this subject and to avoid misunderstanding, it is necessary to remember an already established convention, as it follows.
+I believe that naming things correctly is at the core of software development. Since there is a wide variety of names about this subject, and to avoid misunderstanding, it is necessary to set up a convention.
 
 **Code under test** is our target, i.e., the code we want to test. It normally is a method or a function.
 
-**Test case** is the code we write to run the code under test and make assertions about its behaviour or its result. For instance, to check if the `apply_discount_on_first_order()` function decreased the price as expected.
+**Collaborator code** helps the code under test, usually being called by it.
 
-**Collaborator code** is any code to support the code under test. It may be a class, a method or a function. Sometimes it is replaced by a test double (more on this in a few paragraphs).
+Both Code under test and Collaborator code are the **Production code**, i.e., the code that will run in production.
 
-Code under test and Collaborator code are the **Production code**, i.e., the code that will run in production.
+**Test code** is the code we write to exercise — call —, the code under test and make assertions about its behaviour or its result. For instance, to check if the `apply_discount_on_first_order()` function decreased the price as expected.
 
-**Test double** is a "stunt double" replacing collaborator code in a test case.
+**Test double** is a "stunt double" replacing collaborator code as a way to run a test code.
 
 All above names are self-explanatory to somebody writing tests, except the **Test double**. Being so, keep reading to understand a bit more about it and its importance to tests.
 
-In the cinema, stunt doubles usually look like the main actors and their work is to replace those actors in some scenes. Stunt doubles exist to protect the main actors from stunts or to accomplish some performance they are not capable of. Somehow, a **Test double** works alike, but it only replaces the "actor" during the test phase; never in production.
+In the cinema, stunt doubles usually look like the main actors and their work is to replace those actors in some scenes. Stunt doubles exist to protect the main actors from stunts or to accomplish some performance they are not capable of. Somehow, a **test double** works alike, but it only replaces the "actor" during the test phase; never in production.
 
-Since the roles of a test double can vary, several aliases were created to distinguish them, such as: _dummy_, _fake_, _stub_, _spy_, and _mock_. If you are
-unfamiliar with this classification, I suggest you read a great text by Martin
-Fowler, [Mocks aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs).
+Since the roles of a test double can vary, several aliases were created to distinguish them, such as: _dummy_, _fake_, _stub_, _spy_, and _mock_. If you are unfamiliar with this classification, I suggest you read a great text by Martin Fowler, [Mocks aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs).
 
-As we now have all pieces named accordingly, we can jump into the useful scenarios to use test doubles in Python. But first, it is important to say we will not discuss how to use `unittest.mock` and its syntax. Instead, we will focus on the situations a test double is useful in and how it can help us to simplify tests.
+As we now have all pieces named accordingly and clarified, we can jump into the useful scenarios to use test doubles in Python. But first, it is important to say we will not discuss how to use `unittest.mock` and its syntax. Instead, we will focus on the situations a test double is useful in and how it can help us to simplify tests.
 
 
 ## I want a "do-nothing" replacement
