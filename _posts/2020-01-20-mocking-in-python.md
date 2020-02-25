@@ -6,26 +6,26 @@ featured-img: eyeglasses
 categories: [english]
 ---
 
-In this text about Python's built-in `unittest.mock` library, I address my personal needs in a very practical way to handle mocking in Python.  It is guided by, and based on questions that usually come to myself when I am writing tests that need to use test doubles.
+In this text about Python's built-in `unittest.mock` library, I address my personal needs in a very practical way to handle mocking in Python.  It is guided by, and based on questions that usually come to me when I am writing tests that need to use test doubles.
 
 
-## Behind the names
+## Behind The Names
 
-I believe that naming things correctly is at the core of software development. Since there is a wide variety of names about this subject, and to avoid misunderstanding, it is necessary to set up a convention.
+I believe that naming things correctly is at the core of software development. Since there are a wide variety of terms in this subject area, and to avoid misunderstanding, it is necessary to set up a convention.
 
-**Code under test** is our target, i.e., the code we want to test. It normally is a method or a function.
+**Code under test** is our target i.e., the code we want to test. It normally is a method or a function.
 
 **Collaborator code** helps the code under test, usually being called by it.
 
-Both Code under test and Collaborator code are the **Production code**, i.e., the code that will run in production.
+Both Code under test and Collaborator code are the **Production code** i.e., the code that will run in production.
 
 **Test code** is the code we write to exercise — call —, the code under test and make assertions about its behaviour or its result. For instance, to check if the `apply_discount_on_first_order()` function decreased the price as expected.
 
-**Test double** is a "stunt double" replacing collaborator code as a way to run a test code.
+**Test double** is a "stunt double" that replaces collaborator code as a way to run a test code.
 
-All above names are self-explanatory to somebody writing tests, except the **Test double**. Being so, keep reading to understand a bit more about it and its importance to tests.
+All of the above termterms are self-explanatory to someone writing tests, except the **Test double**. Therefore, please read the explanation below to further understanding its importance to tests.
 
-In the cinema, stunt doubles usually look like the main actors and their work is to replace those actors in some scenes. Stunt doubles exist to protect the main actors from stunts or to accomplish some performance they are not capable of. Somehow, a **test double** works alike, but it only replaces the "actor" during the test phase; never in production.
+In the cinema industry, stunt doubles look similar to the main actors and their job is to replace them in some scenes. Stunt doubles exist to protect the main actors from injuries, or to accomplish some performance they are not capable of. Somehow, a **test double** works alike, but it only replaces the "actor" during the test phase; never in production.
 
 Since the roles of a test double can vary, several aliases were created to distinguish them, such as: _dummy_, _fake_, _stub_, _spy_, and _mock_. If you are unfamiliar with this classification, I suggest you read a great text by Martin Fowler, [Mocks aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs).
 
