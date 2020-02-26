@@ -17,19 +17,19 @@ I believe that naming things correctly is at the core of software development. S
 
 **Collaborator code** helps the code under test, usually being called by it.
 
-Both Code under test and Collaborator code are the **Production code** i.e., the code that will run in production.
+Both code under test and collaborator code are the **production code** i.e., the code that will run in production.
 
 **Test code** is the code we write to exercise — call —, the code under test and make assertions about its behaviour or its result. For instance, to check if the `apply_discount_on_first_order()` function decreased the price as expected.
 
-**Test double** is a "stunt double" that replaces collaborator code as a way to run a test code.
+**Test double** is a "stunt double" that replaces the collaborator code as a way to run a test code.
 
-All of the above termterms are self-explanatory to someone writing tests, except the **Test double**. Therefore, please read the explanation below to further understanding its importance to tests.
+All of the above terms are self-explanatory to someone writing tests, except the test double. Therefore, please read the explanation below to further understand its importance to tests.
 
-In the cinema industry, stunt doubles look similar to the main actors and their job is to replace them in some scenes. Stunt doubles exist to protect the main actors from injuries, or to accomplish some performance they are not capable of. Somehow, a **test double** works alike, but it only replaces the "actor" during the test phase; never in production.
+In the cinema industry, stunt doubles look similar to the main actors and their job is to replace them in some scenes. Stunt doubles exist to protect the main actors from injuries, or to accomplish actions they are not capable of. Somehow, a test double works like a stunt double. However, it only replaces the "actor" during the test phase, but never in production.
 
-Since the roles of a test double can vary, several aliases were created to distinguish them, such as: _dummy_, _fake_, _stub_, _spy_, and _mock_. If you are unfamiliar with this classification, I suggest you read a great text by Martin Fowler, [Mocks aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs).
+Since the roles of a test double can vary, several terms were created to distinguish them, e.g.: _dummy_, _fake_, _stub_, _spy_, and _mock_. If you are unfamiliar with this classification, I suggest you read a great text by Martin Fowler, [Mocks aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs).
 
-As we now have all pieces named accordingly and clarified, we can jump into the useful scenarios to use test doubles in Python. But first, it is important to say we will not discuss how to use `unittest.mock` and its syntax. Instead, we will focus on the situations a test double is useful in and how it can help us to simplify tests.
+As we already have all pieces named accordingly, now we can jump into the scenarios where test doubles are commonly helpful to simplify the tests.
 
 
 ## I want a "do-nothing" replacement
