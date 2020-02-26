@@ -6,7 +6,7 @@ featured-img: novice-people
 categories: [english]
 ---
 
-This rare piece of advice is from [Chuck Jazdzewski](https://twitter.com/chuckjaz). Reproduced with authorization:
+This priceless piece of career advice is from [Chuck Jazdzewski](https://twitter.com/chuckjaz), proudly reproduced with authorization:
 
 ![Authorization from the author](/assets/img/posts/chuckjaz-authorization.png)
 
