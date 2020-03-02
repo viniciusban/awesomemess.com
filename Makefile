@@ -1,4 +1,4 @@
-.PHONY : help gulp_img runserver
+.PHONY : help gulp_img serve
 
 export GEM_HOME := ${HOME}/.local/rubygems
 export PATH := "${GEM_HOME}/bin:${PATH}"
@@ -11,6 +11,6 @@ gulp_img :
 	@#help: Generate responsive images from the "./_img/posts/" directory
 	./node_modules/gulp-cli/bin/gulp.js img
 
-runserver :
+serve :
 	@#help: Run the local server
 	bundle exec jekyll serve --watch
