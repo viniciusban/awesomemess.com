@@ -80,6 +80,23 @@ target :
 ```
 
 
+### Variable interpolation in the Makefile
+
+Passing variables to the invoked commmand:
+
+```
+target1 :
+	[[ -n "${MYVAR}" ]]
+
+target2 :
+	[[ -n "$${MYVAR}" ]]
+```
+
+In `target1` the value of `$MYVAR` is interpolated by `make`.
+
+In `target2` the value of `$MYVAR` is interpolated by the shell when running the `[[` command. Note the "$$".
+
+
 ## Variables
 
 Show default content if variable is empty:
