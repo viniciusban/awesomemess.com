@@ -71,13 +71,13 @@ This `Makefile` is a good starting point because:
 
 ### Separated subshells.
 
-All commands in a `Makefile` are executed in its own subshell. To avoid this, concatenate commands:
+All commands in a `Makefile` are executed in its own subshell. So, if you need to set and environment to run a command, you should concatenate all commands in a sigle line, like this:
 
 ```
 # Makefile
 target :
-	cd /some/directory; \
-		activate_the_virtualenv; \
+	cd /project/root/directory && \
+		source ./.virtualenv/bin/activate && \
 		python my_program.py
 ```
 
