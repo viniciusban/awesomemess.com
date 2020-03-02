@@ -6,7 +6,7 @@ featured-img: don-t-forget-1434063
 categories: [english]
 ---
 
-I think it is worth registering some useful `bash` commands I usually forget its syntax.
+I think it is worth registering some useful `bash` commands I usually forget the syntax.
 
 
 ## find
