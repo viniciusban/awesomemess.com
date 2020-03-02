@@ -47,21 +47,28 @@ A self documenting `Makefile`:
 ```
 # For reference: https://makefiletutorial.com
 
-.PHONY : help all clean install target1
+SHELL := /bin/bash
+
+.PHONY : help target
 
 help : Makefile
 	@#help: Show this screen.
-	@grep -o -e '^\w\+ \?:' -e '^	@#help: .\+' $< | sed -e 's/^	@#help: /\t/' -e 's/ :/:/'
+	@grep -o -e '^\[^_]w\+ \?:' -e '^	@#help: .\+' $< | sed -e 's/^	@#help: /\t/' -e 's/ :/:/'
 
 target : prerequisite
 	@#help: Help text for this target
 	echo 'this target'
 ```
 
-The trick is done by the convention used at the `@#help: ` part. This is by no means a reserved command. It is only a convetion I decided to use.
+This `Makefile` is a good starting point because:
+
+1. It uses `/bin/bash` as the interpreter, instead of the default `/bin/sh`;
+
+2. It shows a description for each target. This trick is done by the convention used at the `@#help: ` part. This is by no means a reserved command. It is only a convetion I decided to use. As an alternative, targets starting with an underline are not listed, as they are considered "internal" only.
 
 
-Separated subshells.
+### Separated subshells.
+
 All commands in a `Makefile` are executed in its own subshell. To avoid this, concatenate commands:
 
 ```
