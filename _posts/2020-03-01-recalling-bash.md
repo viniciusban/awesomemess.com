@@ -6,7 +6,7 @@ featured-img: don-t-forget-1434063
 categories: [english]
 ---
 
-Our memory betrays us, so I think it useful to register some useful and not always used `bash` commands.
+I think it is worth registering some useful `bash` commands I usually forget its syntax.
 
 
 ## find
