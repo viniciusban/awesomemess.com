@@ -29,7 +29,7 @@ In the cinema industry, stunt doubles look similar to the main actors and their 
 
 Since the roles of a test double can vary, several terms were created to distinguish them, e.g.: _dummy_, _fake_, _stub_, _spy_, and _mock_. If you are unfamiliar with this classification, I suggest you read a great text by Martin Fowler, [Mocks aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs).
 
-As we already have all pieces named accordingly, now we can jump into the scenarios where test doubles are commonly helpful to simplify the tests.
+As we now have all pieces named accordingly, we can jump into the scenarios where test doubles are commonly helpful to simplify the tests.
 
 
 ## I want a "do-nothing" replacement
