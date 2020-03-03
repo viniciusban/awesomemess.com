@@ -19,7 +19,7 @@ I believe that naming things correctly is at the core of software development. S
 
 Both code under test and collaborator code are the **production code** i.e., the code that will run in production.
 
-**Test code** is the code we write to exercise — call —, the code under test and make assertions about its behaviour or its result. For instance, to check if the `apply_discount_on_first_order()` function decreased the price as expected.
+**Test code** is the code we write to exercise — aka call —, the code under test and make assertions about its behaviour or its result. For instance, to check if the `apply_discount_on_first_order()` function decreased the price as expected.
 
 **Test double** is a "stunt double" that replaces the collaborator code as a way to run a test code.
 
