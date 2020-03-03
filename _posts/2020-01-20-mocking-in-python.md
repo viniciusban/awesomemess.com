@@ -51,9 +51,9 @@ def raise_salary(department, percentage):
             report_raised(e)
 ```
 
-There are several scenarios we could build to test the above function, but here we will use only one of them as an example: assert who has been hired less than 15 years ago does not have their salary raised.
+We will consider one scenario to test a single aspect of the function above: assert people hired less than 15 years ago do not have their salary raised.
 
-To build this test scenario, we must:
+To build this test, we must:
 
 1. Populate the database with one employee hired less than 15 years ago;
 1. Call the code under test: the `raise_salary()` function;
