@@ -11,7 +11,7 @@ In this text about Python's built-in `unittest.mock` library, I address my perso
 
 ## Behind The Names
 
-I believe that naming things correctly is at the core of software development. Since there are a wide variety of terms in this subject area, and to avoid misunderstanding, it is necessary to set up a convention.
+I believe that naming things correctly is at the core of software development. Since there are a wide variety of terms about software tests, and to avoid misunderstanding, it is necessary to set up a convention.
 
 **Code under test** is our target i.e., the code we want to test. It normally is a method or a function.
 
