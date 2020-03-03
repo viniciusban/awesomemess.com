@@ -48,24 +48,24 @@ def raise_salary(department, percentage):
         if e.start_date.year <= FIFTEEN_YEARS_AGO:
             e.salary *= (1 + percentage)
             Employees.save(e)
-            report_raised(e)
+            report_who_have_salary_raised(e)
 ```
 
-We will consider one scenario to test a single aspect of the function above: assert people hired less than 15 years ago do not have their salary raised.
+We will consider a scenario to test a single aspect of the function above: assert people hired less than 15 years ago do not have their salary raised.
 
 To build this test, we must:
 
 1. Populate the database with one employee hired less than 15 years ago;
-1. Call the code under test: the `raise_salary()` function;
+1. Call the code under test, i.e, the `raise_salary()` function;
 1. Check the employee keeps the same salary.
 
-Very straight, except by one detail: the code under test calls `report_raised()`, which is a collaborator function we do not want to run, because it is not important in this test.
+Straightforward, right? But we must take account of one detail: the code under test calls `report_who_have_salary_raised()`, which is a collaborator function we do not want to run, because it is not important in this test. As we should not modify the code under test to stop calling it only to run the test, we have to find another solution.
 
-The situation: we have to run the code under test, but `report_raised()` should not be called or, even if called, it should do nothing.
+The situation we are facing is we will run the code under test but `report_who_have_salary_raised()` should not be called or, even if called, it should do nothing.
 
-The solution: we must replace `report_raised()` at run time with a callable that does nothing. A **dummy object**.
+The solution we will adopt is replacing `report_who_have_salary_raised()` at run time with another callable with the same name, but that does absolutely nothing. A **dummy object**. In other words, we will make the code under test call another function with the same name as the original one, instead of modify the code under test. But this namesake will do nothing.
 
-The implementation: use `mock.patch()` as a decorator to replace `report_raised()` with a `mock.MagicMock` instance. By default, `MagicMock` instances do nothing when called. It is definitely what we need.
+The implementation uses `mock.patch()` as a decorator to replace `report_who_have_salary_raised()` with a `mock.Mock` instance. By default, `Mock` instances do nothing when called. It is definitely what we need:
 
 ```
 import unittest
@@ -75,23 +75,22 @@ from repository import Employees
 from business_functions import raise_salary
 
 class TestRaiseSalary(unittest.TestCase):
-  @mock.patch("business_functions.report_raised", new=mock.MagicMock())
+  @mock.patch("business_functions.report_who_have_salary_raised", new=mock.Mock())
   def test_must_keep_same_salary_if_hired_less_than_15years_ago(self):
-    sellers = "sellers"
     e = Employees.create(employee_factory(
-      start_date=LAST_YEAR, department=sellers, salary=100.00
+      start_date=ONE_YEAR_AGO, department="sellers", salary=100.00
     ))
-    raise_salary(sellers, 0.10)
+    raise_salary(department="sellers", percentage=0.10)
     same_e = Employees.get(id=e.id)
-    self.assertEqual(same_e.salary, 100.00)
+    self.assertEqual(same_e.salary, e.salary)
 ```
 
-Tip: filling the `new` argument in `mock.patch()` avoids receiving the mocked object in your test case.
+Tip: filling the `new` argument in `mock.patch()`, as we did above, avoids receiving the mocked object as a parameter in your test case. This is useful here because we will not touch this mocked function.
 
-And we are done. We could run the code under test without the side effect of running a non-desirable support function (`report_raised()`). We replaced it with a do-nothing callable, a **dummy object**.
+The test code above runs the code under test without the inconvenience of a non-desirable action, the `report_who_have_salary_raised()` function. It is replaced by a do-nothing callable, a **dummy object**, provided by `mock.Mock()`.
 
 
-
+---
 
 Note: This is a work in progress. Everything below this point will be revisited and rewritten. Come back soon.
 
