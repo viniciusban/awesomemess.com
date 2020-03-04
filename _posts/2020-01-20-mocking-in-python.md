@@ -2,7 +2,7 @@
 layout: post
 title: Mocking in Python
 summary: An "I want to" approach to straight use of the Python's mocking library.
-featured-img: eyeglasses
+featured-img: lego-stunt-double
 categories: [english]
 ---
 
