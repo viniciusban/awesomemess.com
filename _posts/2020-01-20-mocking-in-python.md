@@ -32,7 +32,7 @@ Since the roles of a test double can vary, several terms were created to disting
 As we now have all pieces named accordingly, we can jump into the scenarios where test doubles are commonly helpful to simplify the tests.
 
 
-## I Want a "do-nothing" Replacement
+## I Want To Avoid Some Function From Running
 
 In this example we will use a test double to replace a collaborator code with a "do-nothing" behaviour.
 
