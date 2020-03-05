@@ -69,5 +69,6 @@ taglines:
   - Walking on water and developing software from a specification are easy if both are frozen — Edward V Berard
   - Drink water
   - It is better to be silent and thought a fool, than to speak and remove all doubt — Silvan Engel
+  - An evolving system increases its complexity unless work is done to reduce it — Meir Lehman
 ---
 
