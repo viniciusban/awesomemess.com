@@ -70,5 +70,6 @@ taglines:
   - Drink water
   - It is better to be silent and thought a fool, than to speak and remove all doubt — Silvan Engel
   - An evolving system increases its complexity unless work is done to reduce it — Meir Lehman
+  - It turns out that style matters in programming for the same reason that it matters in writing. It makes for better reading — Douglas Crockford
 ---
 
