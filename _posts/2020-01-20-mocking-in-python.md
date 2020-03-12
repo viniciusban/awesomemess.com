@@ -90,22 +90,6 @@ Tip: filling the `new` argument in `mock.patch()`, as we did above, avoids recei
 The test code above runs the code under test without the inconvenience of a non-desirable action, the `report_who_have_salary_raised()` function. It is replaced by a do-nothing callable, a **dummy object**, provided by `mock.Mock()`.
 
 
----
-
-TODO:
-
-- (x) explain what we will do.
-- (x) show the code under test.
-- (x) tell what we will test.
-- (x) describe the steps we must follow to achieve the desired test.
-- (x) explain the strategy to mock in this scenario.
-- (x) explain how to implement the strategy with a real test case.
-- (x) make an overview as the last paragraph.
-
----
-
-
-
 ## I Would Like to Test the Function _X_'s Behaviour When _Y_ Returns a Specific Value ##
 
 
@@ -180,7 +164,25 @@ The tests above exercise the `discount_for_this_customer()` function in three di
 
 ---
 
-Note: This is a work in progress. Everything below this point will be revisited and rewritten. Come back soon.
+# Important #
+
+This is still a work in progress. I am revisiting the remaining sections.
+
+Come back soon.
+
+<!--
+
+TODO:
+
+- ( ) explain what we will do.
+- ( ) show the code under test.
+- ( ) tell what we will test.
+- ( ) describe the steps we must follow to achieve the desired test.
+- ( ) explain the strategy to mock in this scenario.
+- ( ) explain how to implement the strategy with a real test case.
+- ( ) make an overview as the last paragraph.
+
+
 
 ---
 
@@ -254,3 +256,5 @@ print ("Back to the originals:", (A().f(), A().g()))
 That's it. These are the most common uses for the `unittest.mock` library.
 Obviously I left out many topics about mocking in Python, but surely you can
 find excelent resources about them in the internet.
+
+-->
