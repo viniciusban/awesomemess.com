@@ -75,14 +75,14 @@ from repository import Employees
 from business_functions import raise_salary
 
 class TestRaiseSalary(unittest.TestCase):
-  @mock.patch("business_functions.report_who_have_salary_raised", new=mock.Mock())
-  def test_must_keep_same_salary_if_hired_less_than_15years_ago(self):
-    e = Employees.create(employee_factory(
-      start_date=ONE_YEAR_AGO, department="sellers", salary=100.00
-    ))
-    raise_salary(department="sellers", percentage=0.10)
-    same_e = Employees.get(id=e.id)
-    self.assertEqual(same_e.salary, e.salary)
+    @mock.patch("business_functions.report_who_have_salary_raised", new=mock.Mock())
+    def test_must_keep_same_salary_if_hired_less_than_15years_ago(self):
+        e = Employees.create(employee_factory(
+            start_date=ONE_YEAR_AGO, department="sellers", salary=100.00
+        ))
+        raise_salary(department="sellers", percentage=0.10)
+        same_e = Employees.get(id=e.id)
+        self.assertEqual(same_e.salary, e.salary)
 ```
 
 Tip: filling the `new` argument in `mock.patch()`, as we did above, avoids receiving the mocked object as a parameter in your test case. This is useful here because we will not touch this mocked function.
@@ -137,23 +137,23 @@ from business_functions import compute_customer_level, discount_for_this_custome
 ANY_CUSTOMER_ID = 1234
 
 class TestRaiseSalary(unittest.TestCase):
-  @mock.patch("business_functions.compute_customer_level")
-  def test_amount_must_be_010_for_silver_customer(self, mocked_function):
-    mocked_function.return_value = "silver"
-    amount = discount_for_this_customer(customer_id=ANY_CUSTOMER_ID)
-    self.assertEqual(amount, 0.10)
+    @mock.patch("business_functions.compute_customer_level")
+    def test_amount_must_be_010_for_silver_customer(self, mocked_function):
+        mocked_function.return_value = "silver"
+        amount = discount_for_this_customer(customer_id=ANY_CUSTOMER_ID)
+        self.assertEqual(amount, 0.10)
 
-  @mock.patch("business_functions.compute_customer_level")
-  def test_amount_must_be_020_for_gold_customer(self, mocked_function):
-    mocked_function.return_value = "gold"
-    amount = discount_for_this_customer(customer_id=ANY_CUSTOMER_ID)
-    self.assertEqual(amount, 0.20)
+    @mock.patch("business_functions.compute_customer_level")
+    def test_amount_must_be_020_for_gold_customer(self, mocked_function):
+        mocked_function.return_value = "gold"
+        amount = discount_for_this_customer(customer_id=ANY_CUSTOMER_ID)
+        self.assertEqual(amount, 0.20)
 
-  @mock.patch("business_functions.compute_customer_level")
-  def test_amount_must_be_0_for_other_customer(self, mocked_function):
-    mocked_function.return_value = "other level"
-    amount = discount_for_this_customer(customer_id=ANY_CUSTOMER_ID)
-    self.assertEqual(amount, 0)
+    @mock.patch("business_functions.compute_customer_level")
+    def test_amount_must_be_0_for_other_customer(self, mocked_function):
+        mocked_function.return_value = "other level"
+        amount = discount_for_this_customer(customer_id=ANY_CUSTOMER_ID)
+        self.assertEqual(amount, 0)
 ```
 
 We have effectively tested all the `discount_for_this_customer()` behaviour in 3 simple and small test methods. Each one managing its own scenario, independent of the others and decoupled from the `compute_customer_level()` details. By the way, it is important to talk a little about the `customer_id`.
