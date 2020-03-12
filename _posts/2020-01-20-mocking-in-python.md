@@ -90,7 +90,7 @@ Tip: filling the `new` argument in `mock.patch()`, as we did above, avoids recei
 The test code above runs the code under test without the inconvenience of a non-desirable action, the `report_who_have_salary_raised()` function. It is replaced by a do-nothing callable, a **dummy object**, provided by `mock.Mock()`.
 
 
-## I Would Like to Test the Function _X_'s Behaviour When _Y_ Returns a Specific Value ##
+## I Want to Test the Function _X_ Behaviour When _Y_ Returns a Specific Value ##
 
 
 In this scenario we will use a test double to return a fixed response from a collaborator function.
