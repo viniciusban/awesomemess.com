@@ -90,7 +90,7 @@ Tip: filling the `new` argument in `mock.patch()`, as we did above, avoids recei
 The test code above runs the code under test without the inconvenience of a non-desirable action, the `report_who_have_salary_raised()` function. It is replaced by a do-nothing callable, a **dummy object**, provided by `mock.Mock()`.
 
 
-## I Want to Test the Function _X_ Behaviour When _Y_ Returns a Specific Value ##
+## I Want to Test the Behaviour of Function _X_ When _Y_ Returns a Specific Value ##
 
 
 In this scenario we will use a test double to return a fixed response from a collaborator function.
@@ -111,20 +111,20 @@ The `discount_for_this_customer()` function should give the correct discount for
 
 There are, basically, two approaches to make this test:
 
-1. Simulate a fixed answer from `compute_customer_level()`, ignoring all its complexities;
+1. Set a fixed answer from `compute_customer_level()`, ignoring all its complexities;
 1. Know the `compute_customer_level()` rules, prepare a customer matching those characteristics in the database and have the desired response.
 
-Let's think for a moment. Which one we want to test: `discount_for_this_customer()` or `compute_customer_level()`? The first one, right? For that reason the rules to compute a customer's level is not important here. Under this point of view, we move towards the first option, i.e., simulate a fixed answer from `compute_customer_level()`.
+Let's think for a moment. Which one we want to test: `discount_for_this_customer()` or `compute_customer_level()`? The first one, right? For that reason the rules to compute a customer's level are not important here. Under this point of view, we move towards the first option, i.e., set a fixed answer from `compute_customer_level()`.
 
 This choice has a couple of benefits. The obvious one is **simplicity**. The other one, very important but not so obvious at first, is **decoupling**. If we had chosen to prepare a customer with specific characteristics, we would be coupling our test to the internal behaviour of a production code that is out of the current test scope. When `compute_customer_level()` rules change — and they will — suddenly our test could break and we should change the configuration of the customer to adapt it to the new rules. As in life, when possible, always choose the simpler alternative.
 
-So, our test will be very simple. We will:
+So, as we are going with the first and simpler option, our test will be fairly straightforward. We will:
 
 1. Set a specific response for `compute_customer_level()`;
-1. Call `discount_for_this_customer()` with any `customer_id` (more on this later);
-1. Assert it returns the correct amount.
+1. Call `discount_for_this_customer()` with **any** `customer_id` (keep reading to know more about this);
+1. Assert it returns the expected amount.
 
-In this test we will replace the real `compute_customer_level()` with a **stub object**. It will always return the pre-defined value.
+In this test we will replace the real `compute_customer_level()` with a **stub object**. It will always return the predefined value.
 
 The implementation uses `mock.patch()` as a decorator to replace the real function with a **stub object**:
 
