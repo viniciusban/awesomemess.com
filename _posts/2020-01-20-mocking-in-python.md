@@ -56,7 +56,7 @@ We will consider a scenario to test a single aspect of the function above: asser
 To build this test, we must:
 
 1. Populate the database with one employee hired less than 15 years ago;
-1. Call the code under test, i.e, the `raise_salary()` function;
+1. Call the code under test, i.e., the `raise_salary()` function;
 1. Check the employee keeps the same salary.
 
 Straightforward, right? But we must take account of one detail: the code under test calls `report_who_have_salary_raised()`, which is a collaborator function we do not want to run, because it is not important in this test. As we should not modify the code under test to stop calling it only to run the test, we have to find another solution.
