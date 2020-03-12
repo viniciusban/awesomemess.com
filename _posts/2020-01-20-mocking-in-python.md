@@ -8,6 +8,12 @@ categories: [english]
 
 In this text about Python's built-in `unittest.mock` library, I address my personal needs in a very practical way to handle mocking in Python.  It is guided by, and based on questions that usually come to me when I am writing tests that need to use test doubles.
 
+It is recommended that you know what _mocking_ is and how to use it in Python to better understand this article. If you are still entering this field, I will try to give you a very condensed overview of what mocking is about in the following paragraph.
+
+You use mocking in tests when you want to replace a class, or a function, or a method with another one, e.g., a kind of a stunt double. You want to do this when the code you want to test uses them, and you cannot manually change your code. After all, the tests are automatic. For example, you want to test if the `subscribe_member()` function really creates the member record in the database, but the subscription process sends a welcome email at the end. Obviously you do not want to send an email on each test. In that case, you can replace the real `send_welcome_email()` function with a fake one — which does not send the message, it only pretends this behaviour — to avoid sending a real message to the recipient mailbox. This is what mocking is about, in a nutshell: replacing a real object with another one, to counterfeit the original behaviour.
+
+Do not expect to become an expert only by reading this small and poor example. I strongly encourage you to visit the official documentation on how to [get started with mocking in Python](https://docs.python.org/3/library/unittest.mock-examples.html).
+
 
 ## Behind The Names
 
