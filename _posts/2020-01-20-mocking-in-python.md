@@ -92,102 +92,100 @@ The test code above runs the code under test without the inconvenience of a non-
 
 ---
 
+TODO:
+
+- (x) explain what we will do.
+- (x) show the code under test.
+- (x) tell what we will test.
+- (x) describe the steps we must follow to achieve the desired test.
+- (x) explain the strategy to mock in this scenario.
+- (x) explain how to implement the strategy with a real test case.
+- (x) make an overview as the last paragraph.
+
+---
+
+
+
+## I Would Like to Test the Function _X_'s Behaviour When _Y_ Returns a Specific Value ##
+
+
+In this scenario we will use a test double to return a fixed response from a collaborator function.
+
+The code we want to test is this:
+
+```
+def discount_for_this_customer(customer_id):
+    level = compute_customer_level(customer_id)
+    if level == "silver":
+        return 0.10
+    if level == "gold":
+        return 0.20
+    return 0
+```
+
+The `discount_for_this_customer()` function should give the correct discount for a given customer. As we can see, it depends on the `compute_customer_level()` collaborator function to have the customer's level and, based on that, decide the correct amount.
+
+There are, basically, two approaches to make this test:
+
+1. Simulate a fixed answer from `compute_customer_level()`, ignoring all its complexities;
+1. Know the `compute_customer_level()` rules, prepare a customer matching those characteristics in the database and have the desired response.
+
+Let's think for a moment. Which one we want to test: `discount_for_this_customer()` or `compute_customer_level()`? The first one, right? For that reason the rules to compute a customer's level is not important here. Under this point of view, we move towards the first option, i.e., simulate a fixed answer from `compute_customer_level()`.
+
+This choice has a couple of benefits. The obvious one is **simplicity**. The other one, very important but not so obvious at first, is **decoupling**. If we had chosen to prepare a customer with specific characteristics, we would be coupling our test to the internal behaviour of a production code that is out of the current test scope. When `compute_customer_level()` rules change — and they will — suddenly our test could break and we should change the configuration of the customer to adapt it to the new rules. As in life, when possible, always choose the simpler alternative.
+
+So, our test will be very simple. We will:
+
+1. Set a specific response for `compute_customer_level()`;
+1. Call `discount_for_this_customer()` with any `customer_id` (more on this later);
+1. Assert it returns the correct amount.
+
+In this test we will replace the real `compute_customer_level()` with a **stub object**. It will always return the pre-defined value.
+
+The implementation uses `mock.patch()` as a decorator to replace the real function with a **stub object**:
+
+```
+import unittest
+from unittest import mock
+
+from business_functions import compute_customer_level, discount_for_this_customer
+
+ANY_CUSTOMER_ID = 1234
+
+class TestRaiseSalary(unittest.TestCase):
+  @mock.patch("business_functions.compute_customer_level")
+  def test_amount_must_be_010_for_silver_customer(self, mocked_function):
+    mocked_function.return_value = "silver"
+    amount = discount_for_this_customer(customer_id=ANY_CUSTOMER_ID)
+    self.assertEqual(amount, 0.10)
+
+  @mock.patch("business_functions.compute_customer_level")
+  def test_amount_must_be_020_for_gold_customer(self, mocked_function):
+    mocked_function.return_value = "gold"
+    amount = discount_for_this_customer(customer_id=ANY_CUSTOMER_ID)
+    self.assertEqual(amount, 0.20)
+
+  @mock.patch("business_functions.compute_customer_level")
+  def test_amount_must_be_0_for_other_customer(self, mocked_function):
+    mocked_function.return_value = "other level"
+    amount = discount_for_this_customer(customer_id=ANY_CUSTOMER_ID)
+    self.assertEqual(amount, 0)
+```
+
+We have effectively tested all the `discount_for_this_customer()` behaviour in 3 simple and small test methods. Each one managing its own scenario, independent of the others and decoupled from the `compute_customer_level()` details. By the way, it is important to talk a little about the `customer_id`.
+
+You may be thinking why we can use any `customer_id` in the tests above. Because we replaced `compute_customer_level()` with a test double which only returns a canned response and does nothing else. The original function signature did not change, only its response. And the tests do not even touch the database. This is one additional advantage of decoupling the test from the collaborator code: beyond simpler, it is faster.
+
+The tests above exercise the `discount_for_this_customer()` function in three different scenarios. It replaces the collaborator code with a **stub object** to make the tests simpler, focused, decoupled and faster. As every test should be.
+
+---
+
 Note: This is a work in progress. Everything below this point will be revisited and rewritten. Come back soon.
 
 ---
 
 
 
-## I want to have control over the real thing
-
-The production code I want to exercise uses a method from a class, but I want
-to determine what it responds to have a constant output and idempotent tests.
-
-This class has other methods and properties I don't care about in this test,
-but I want to focus only in this specific method.
-
-Solution: We want a Stub, i.e., a canned response to calls. Patch the specific
-method, receive it in the parameters list and set its `return_value`.
-
-```
-# Patch the method, receive it as a parameter and set a return_value.
-
-print ("Originals:", (A().f(), A().g()), end="\n\n")
-
-@mock.patch("__main__.A.f")
-def a(stub_f):
-    stub_f.return_value = "my custom returned value"
-    print ("Patched f():", A().f(), end="\n\n")
-
-a()
-print ("Back to the originals:", (A().f(), A().g()))
-```
-
-The solution above handles the patching of only one method. But if you want to
-control more than one, I suggest you to patch the entire class and set a
-`return_value` for each of the methods we want to control.
-
-```
-# Patch the entire class, receive it as a parameter and set a
-# return_value for the desired methods.
-
-print ("Originals:", (A().f(), A().g()), end="\n\n")
-
-@mock.patch("__main__.A")
-def a(patcher_A):
-    stub_A = patcher_A.return_value
-    stub_A.f.return_value = "my custom returned value"
-    stub_A.g.return_value = "the return of the other method"
-    print ("Patched f():", A().f())
-    print ("Patched g():", A().g(), end="\n\n")
-
-a()
-print ("Back to the originals:", (A().f(), A().g()))
-```
-
-Back to the one-method scenario, if you have several consecutive calls to the
-method you want to control, and each call should return a different value, you
-should set the `side_effect` property with a list of values.
-
-```
-# Patch the method, receive it as parameter and set a side_effect to
-# control consecutive calls.
-
-print ("Originals:", (A().f(), A().g()), end="\n\n")
-
-@mock.patch("__main__.A.f")
-def a(stub_f):
-    stub_f.side_effect = ["first call", "second call", "and so on..."]
-    print ("Patched f():", A().f())
-    print ("Patched f():", A().f())
-    print ("Patched f():", A().f(), end="\n\n")
-
-a()
-print ("Back to the originals:", (A().f(), A().g()))
-```
-
-Yet another similar situation is when you need to force an exception. To get
-there, set `side_effect` again.
-
-```
-# Patch the method, receive it as a parameter and set a side_effect
-# to raise and exception.
-
-print ("Originals:", (A().f(), A().g()), end="\n\n")
-
-@mock.patch("__main__.A.f")
-def a(stub_f):
-    stub_f.side_effect = RuntimeError("My own forced error")
-    try:
-        A().f()
-    except RuntimeError as exc:
-        print ("Raised: %s" % exc, end="\n\n")
-    else:
-        print ("Not raised an exception")
-
-a()
-print ("Back to the originals:", (A().f(), A().g()))
-```
 
 ## I want to inspect the real thing
 
