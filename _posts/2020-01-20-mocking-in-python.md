@@ -12,11 +12,11 @@ In this text about Python's built-in `unittest.mock` library, I address my perso
 
 ## A Very Brief Introduction to Mocking ##
 
-It is recommended that you know what _mocking_ is and how to use it in Python to better understand this article. If you are still entering this field, I will try to give you a very condensed overview of what mocking is about in the following paragraph.
+It is recommended that you know what _mocking_ is and how to use it in Python to better understand this article. If you are still entering this field, I will try to give you a quick overview of what mocking is about in the following paragraph.
 
-You use mocking in tests when you want to replace a class, or a function, or a method with another one, e.g., a kind of a stunt double. You want to do this when the code you want to test uses them, and you cannot manually change your code. After all, the tests are automatic. For example, you want to test if the `subscribe_member()` function really creates the member record in the database, but the subscription process sends a welcome email at the end. Obviously you do not want to send an email on each test. In that case, you can replace the real `send_welcome_email()` function with a fake one — which does not send the message, it only pretends this behaviour — to avoid sending a real message to the recipient mailbox. This is what mocking is about, in a nutshell: replacing a real object with another one, to counterfeit the original behaviour.
+As an illustration, let's suppose we are developing the subscription process of a new site, which it is composed by two steps: 1) create the new member's record; and 2) send a welcome message. So, we need to check if the `subscribe_member()` function creates the record in the database correctly, but it is inconvenient to send that email message to the inbox recipient on each test. How to execute `subscribe_member()` without sending the email? One solution is **mocking**. With mocking we can replace the real `send_welcome_email()` function in run time with a "stunt double" (more on this in next section) to counterfeit the original behaviour, i.e., pretend to send the email. In a nutshell, it is why mocking is useful: to substitute a real object for another one, helping you to run automated tests.
 
-Do not expect to become an expert only by reading this small and poor example. I strongly encourage you to visit the official documentation on how to [get started with mocking in Python](https://docs.python.org/3/library/unittest.mock-examples.html).
+Disclaimer: you should not consider yourself an expert only by reading this small and poor example above. I strongly encourage you to visit the official documentation on how to [get started with mocking in Python](https://docs.python.org/3/library/unittest.mock-examples.html).
 
 
 ## Behind The Names
