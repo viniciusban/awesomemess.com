@@ -176,7 +176,7 @@ The tests above exercise the `discount_for_this_customer()` function in three di
 
 # Important #
 
-This is still a work in progress. I am revisiting the remaining sections.
+This is still a work in progress. New sections are coming.
 
 Come back soon.
 
