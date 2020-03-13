@@ -33,9 +33,7 @@ Both code under test and collaborator code are the **production code** i.e., the
 
 **Test double** is a "stunt double" that replaces the collaborator code as a way to run a test code.
 
-All of the above terms are self-explanatory to someone writing tests, except the test double. Therefore, please read the explanation below to further understand its importance to tests.
-
-In the cinema industry, stunt doubles look similar to the main actors and their job is to replace them in some scenes. Stunt doubles exist to protect the main actors from injuries, or to accomplish actions they are not capable of. Somehow, a test double works like a stunt double. However, it only replaces the "actor" during the test phase, but never in production.
+All of the above terms are self-explanatory to anyone writing tests, except **test double**. In the cinema industry, stunt doubles work impersonating actors in some scenes. Stunt doubles look like the main actors, walk like them, dress like them, but are not them. Somehow, a test double is like a stunt double. A test double has the same name and the same signature as the main object — they look like them — but they are not them.
 
 Since the roles of a test double can vary, several terms were created to distinguish them, e.g.: _dummy_, _fake_, _stub_, _spy_, and _mock_. If you are unfamiliar with this classification, I suggest you read a great text by Martin Fowler, [Mocks aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs).
 
