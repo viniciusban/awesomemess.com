@@ -72,7 +72,7 @@ This `Makefile` is a good starting point because:
 2. It shows a help message for each target. This trick is done by the convention used at the `@#help: ` part. This is by no means a reserved command. It is only a convetion I created. Targets starting with an underline are not listed, as they are considered "internal" only.
 
 
-### Separated subshells.
+### make Runs Everything Separately
 
 All commands in a `Makefile` are executed in its own subshell. So, if you need to set and environment to run a command, you should concatenate all commands in a sigle line, like this:
 
@@ -91,15 +91,15 @@ Passing variables to the invoked commmand:
 
 ```
 target1 :
-	[[ -n "${MYVAR}" ]]
+	echo "${MYVAR}"
 
 target2 :
-	[[ -n "$${MYVAR}" ]]
+	echo "$${MYVAR}"
 ```
 
 In `target1` the value of `$MYVAR` is interpolated by `make`.
 
-In `target2` the value of `$MYVAR` is interpolated by the shell when running the `[[` command. Note the "$$".
+In `target2` the value of `$MYVAR` is interpolated by the shell when running the `echo` command. Notice the double "$" ("$$").
 
 
 ## Variables
