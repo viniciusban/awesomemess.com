@@ -114,6 +114,15 @@ $ echo ${NAME:-no content}
 John
 ```
 
+Now, the opposite: show some content if variable is not empty:
+
+```
+$ echo ${NAME:+has value}
+$ NAME=John
+$ echo ${NAME:+has value}
+has value
+```
+
 Efficient "or" using pattern comparison:
 
 ```
