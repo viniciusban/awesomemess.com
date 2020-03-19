@@ -41,12 +41,14 @@ $ find . -name '__pycache__' -prune -execdir rm -rf {} \;
 
 ## make
 
+For reference:
+
+- [GNU Make](https://www.cl.cam.ac.uk/teaching/0910/UnixTools/make.pdf) - book in PDF written by Richard M. Stallman, Roland McGrath, and Paul D. Smith;
+- [Makefile Tutorial](https://makefiletutorial.com), based on the above book.
 
 A self documenting `Makefile`:
 
 ```
-# For reference: https://makefiletutorial.com
-
 SHELL := /bin/bash
 
 .PHONY : help
