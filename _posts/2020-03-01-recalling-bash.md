@@ -102,7 +102,7 @@ In `target1` the value of `$MYVAR` is interpolated by `make`.
 In `target2` the value of `$MYVAR` is interpolated by the shell when running the `echo` command. Notice the double "$" ("$$").
 
 
-## Variables
+## Variables in bash
 
 Show default content if variable is empty:
 
@@ -112,4 +112,25 @@ no content
 $ NAME=John
 $ echo ${NAME:-no content}
 John
+```
+
+
+### Arrays
+
+Creating and setting values:
+
+```
+$ declare -a colors
+$ colors=(red blue)
+$ colors+=(green)
+$ echo ${colors[@]}
+red blue green
+```
+
+Traversing array:
+
+```
+for item in "${colors[@]}"; do
+    echo $item
+done
 ```
