@@ -153,3 +153,12 @@ for item in "${colors[@]}"; do
     echo $item
 done
 ```
+
+
+## Shell Invocation ##
+
+Start a sub-shell, execute some commands after `.bashrc` and keep the shell opened:
+
+```
+$ bash --init-file <(echo '. ~/.bashrc;pwd;ls -a')
+```
