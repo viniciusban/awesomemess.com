@@ -49,14 +49,15 @@ A self documenting `Makefile`:
 
 SHELL := /bin/bash
 
-.PHONY : help target
-
+.PHONY : help
 help : Makefile
 	@#help: Show this screen.
 	@grep -ve '^\w\+ :=' $< | \
 		grep -o -e '^[^_\.]\w\+ \?:' -e '^	@#help: .\+' | \
 		sed -e 's/^	@#help: /\t/' -e 's/ :/:/'
 
+
+.PHONY : target
 target : prerequisite
 	@#help: Help text for this target
 	echo 'this target'
