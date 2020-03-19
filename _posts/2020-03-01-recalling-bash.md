@@ -114,6 +114,16 @@ $ echo ${NAME:-no content}
 John
 ```
 
+Efficient "or" using pattern comparison:
+
+```
+if [[ "$option" =~ ^(-v|--verbose)$ ]]; then
+  echo "verbose enabled"
+else
+  echo "silent"
+fi
+```
+
 
 ### Arrays
 
