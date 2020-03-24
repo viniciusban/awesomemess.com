@@ -21,6 +21,8 @@ The first difference is that it runs under a lightweight VM, with very little ov
 
 Another difference is it does not run SystemD, so you do not have standard Linux services. If you install, for example, Postgres or Docker, you cannot manage it through `systemctl` and it will not start automatically when you enter the distro. You have to use the `service` utility to start and stop the service manually. For the same reason, software update does not run automatically.
 
+Additionaly, WSL doesn't clean `/tmp` directory. So, be careful. There is no such thing as a fresh `/tmp` on each boot.
+
 
 ## How to manage several WSL distros ##
 
