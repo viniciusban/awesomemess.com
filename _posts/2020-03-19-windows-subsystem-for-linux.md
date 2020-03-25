@@ -15,7 +15,7 @@ Some day I will write more about this. For the time being I will focus on the ha
 
 ## How is WSL similar or different from traditional Linux? ##
 
-First of all, WSL **is not** Linux. WSL is an infrastructure — a virtual machine — to run Linux kernels under Windows. As its name suggests, it is a subsystem.
+First of all, WSL **is not** Linux. WSL is an infrastructure to run Linux kernels under Windows as lightweight virtual machines. As its name suggests, it is a subsystem.
 
 The Ubuntu distribution for WSL, for instance, is a real Ubuntu. You manage packages with `apt`, and `bash` is the shell interpreter. Everything works "normal". So normal, that you can install and run Docker (which uses container virtualization: namespaces, cgroups and chroot) in it. However, there are [ways to know you are in WSL](#how-to-know-if-in-wsl).
 
@@ -28,7 +28,7 @@ Additionaly, WSL distros do not clean the `/tmp` directory. So, be careful. Ther
 
 ## How to manage several WSL distros ##
 
-As WSL distros are virtual machines, we can have many of them installed and running.
+As WSL distros run as virtual machines, we can have many of them installed and running.
 
 We will use the default `wsl` client from the Powershell command line (prompts identified by a `>` symbol). So, you should open the Windows Powershell and do not be afraid to type. We are linuxers, after all.
 
