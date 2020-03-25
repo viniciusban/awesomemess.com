@@ -47,7 +47,7 @@ List all installed distros:
 > wsl --list --all -v
 ```
 
-Enter a distro:
+You do not need to "start" a WSL distro. You simply enter it:
 
 ```
 > wsl --distribution MyDistro
