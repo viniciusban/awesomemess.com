@@ -224,3 +224,5 @@ start_ssh_agent () {
 This approach will start only one ssh agent for a distro. If you open another terminal instance for the same distro, it will reuse the same agent, if it is still valid.
 
 These two solutions are only examples of how services could be started in a Linux distro running under WSL. You have all Linux flexibility to come up with your own solution, for your specific scenario.
+
+There are also solutions to start services under WSL when your Windows host boots up. You can find a lot of them googling.
