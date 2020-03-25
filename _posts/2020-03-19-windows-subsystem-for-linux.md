@@ -120,6 +120,12 @@ You can start a service inside WSL and access it from Windows, transparently. Fo
 
 Another very useful scenario is: if you have two (or more) WSL distros running, one can access the other and Windows can access both as well. Just use `127.0.0.1` (localhost) and the corresponding port everywhere. It is transparent, with zero configuration.
 
+Windows programs can access the distro's filesystem. Try the following command from your distro, to open the Windows Explorer for your current directory:
+
+```
+$ explorer.exe .
+```
+
 
 ## Which terminal may I use with WSL? ##
 
