@@ -164,7 +164,9 @@ $ uname -r
 But as we see above, you should check for "microsoft" with all letters in lowercase. Here is an example:
 
 ```
-$ uname -r | grep -i microsoft
+if (uname -r | grep -qi microsoft); then
+  echo 'Running under WSL'
+fi
 ```
 
 When you inspect the bash environment, you see some useful variables there. Use them at your disposal:
