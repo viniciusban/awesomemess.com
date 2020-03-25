@@ -15,13 +15,15 @@ Some day I will write more about this. For the time being I will focus on the ha
 
 ## How is WSL similar or different from traditional Linux? ##
 
-WSL **is** Linux, but in a different way.
+First of all, WSL **is not** Linux. WSL is an infrastructure — a virtual machine — to run Linux kernels under Windows. As its name suggests, it is a subsystem.
 
-The first difference is that it runs under a lightweight VM, with very little overhead. The performance is very good.
+The Ubuntu distribution for WSL, for instance, is a real Ubuntu. You manage packages with `apt`, and `bash` is the shell interpreter. Everything works "normal". So normal, that you can install and run Docker (which uses container virtualization: namespaces, cgroups and chroot) in it. However, there are [ways to know you are in WSL](#how-to-know-if-in-wsl).
 
-Another difference is it does not run SystemD, so you do not have standard Linux services. If you install, for example, Postgres or Docker, you cannot manage it through `systemctl` and it will not start automatically when you enter the distro. You have to use the `service` utility to start and stop the service manually. For the same reason, software update does not run automatically.
+As I said before, things are "normal". Even so, there are differences between a distro running under WSL and a traditional Linux.
 
-Additionaly, WSL doesn't clean `/tmp` directory. So, be careful. There is no such thing as a fresh `/tmp` on each boot.
+One important difference is: WSL distros do not run SystemD, so you cannot have standard Linux services. If you install, for example, Postgres or Docker, you cannot manage them through `systemctl` and they will not start automatically when you enter the distro. You have to use the `service` utility to start and stop services. For the same reason, software update does not run automatically.
+
+Additionaly, WSL distros do not clean the `/tmp` directory. So, be careful. There is no such thing as a fresh `/tmp` on each boot. Keep an eye on your disk space.
 
 
 ## How to manage several WSL distros ##
