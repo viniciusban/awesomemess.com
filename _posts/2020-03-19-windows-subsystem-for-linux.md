@@ -150,7 +150,7 @@ $ echo $(tput sitm)it must appear in italics$(tput ritm)
 Finally, my personal choice is Mintty.
 
 
-## How To Know If Running Under WSL ##
+## How to know if running under WSL ##
 
 There are ways to know if you are running a Linux distro under WSL.
 
@@ -180,7 +180,7 @@ WSLENV=
 ```
 
 
-## Start Services When Entering The Distro ##
+## Start services when entering the distro ##
 
 As a WSL distro does not have traditional Linux services, you should start them when you want. For example:
 
