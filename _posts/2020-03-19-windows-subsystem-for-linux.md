@@ -21,7 +21,7 @@ The Ubuntu distribution for WSL, for instance, is a real Ubuntu. You manage pack
 
 As I said before, things are "normal". Even so, there are differences between a distro running under WSL and a traditional Linux.
 
-One important difference is: WSL distros do not run SystemD, so you cannot have standard Linux services. If you install, for example, Postgres or Docker, you cannot manage them through `systemctl` and they will not start automatically when you enter the distro. You have to use the `service` utility to start and stop services. For the same reason, software update does not run automatically.
+One important difference is: WSL distros do not run SystemD, so you cannot have standard Linux services. If you install, for example, Postgres or Docker, you cannot manage them through `systemctl` and they will not start automatically when you enter the distro. You have to use the `service` utility to start and stop services. For the same reason, software update does not run automatically. Despite not having Linux services, one can use creativity and [start services when entering the WSL distro](#start-services-when-entering-the-distro).
 
 Additionaly, WSL distros do not clean the `/tmp` directory. So, be careful. There is no such thing as a fresh `/tmp` on each boot. Keep an eye on your disk space.
 
@@ -177,3 +177,47 @@ WSL_GUEST_IP=172.31.132.120
 WSLENV=
 ```
 
+## Start Services When Entering The Distro ##
+
+As a WSL distro does not have traditional Linux services, you should start them when you want. For example:
+
+```
+$ sudo service postgresql start
+```
+
+It works, but it is not convenient typing the same command every time you enter the distro. We can do better, by adding the command above to the end of the `~/.profile` file to have the PostgreSQL server launched automatically. Additionally, add a permission in `/etc/sudoers.d` using the `visudo` command, to circumvent the password to enable `sudo`:
+
+```
+%sudo   ALL=(ALL) NOPASSWD: /usr/sbin/service postgresql start
+```
+
+Now, the PostgreSQL server will start whenever you enter the distro, automatically.
+
+Some services require a more elaborate solution, like the ssh agent, used to keep your private key passphrases during a session:
+
+```
+start_ssh_agent () {
+  if [[ -n "$SSH_AGENT_PID" ]]; then
+    current_agent=$(pgrep -f ssh-agent)
+    if [[ "$current_agent" = "$SSH_AGENT_PID" ]]; then
+      return
+    fi
+  fi
+
+  source_file=/tmp/ssh-agent-source-file
+  if [[ -f "$source_file" ]]; then
+    source $source_file >/dev/null 2>&1
+    current_agent=$(pgrep -f ssh-agent)
+    if [[ "$current_agent" = "$SSH_AGENT_PID" ]]; then
+      return
+    fi
+  fi
+
+  ssh-agent -s >$source_file
+  source $source_file >/dev/null 2>&1
+}
+```
+
+This approach will start only one ssh agent for a distro. If you open another terminal instance for the same distro, it will reuse the same agent, if it is still valid.
+
+These two solutions are only examples of how services could be started in a Linux distro running under WSL. You have all Linux flexibility to come up with your own solution, for your specific scenario.
