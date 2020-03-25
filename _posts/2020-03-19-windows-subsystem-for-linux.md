@@ -15,13 +15,13 @@ Some day I will write more about this. For the time being I will focus on the ha
 
 ## How is WSL similar or different from traditional Linux? ##
 
-First of all, WSL **is not** Linux. WSL is an infrastructure to run Linux kernels under Windows as lightweight virtual machines. As its name suggests, it is a subsystem.
+First of all, **WSL is not Linux**. WSL is an infrastructure to run Linux kernels under Windows as lightweight virtual machines. As its name suggests, it is a subsystem.
 
-The Ubuntu distribution for WSL, for instance, is a real Ubuntu. You manage packages with `apt`, and `bash` is the shell interpreter. Everything works "normal". So normal, that you can install and run Docker (which uses container virtualization: namespaces, cgroups and chroot) in it. However, there are [ways to know you are in WSL](#how-to-know-if-running-under-wsl).
+The Ubuntu distribution for WSL, for instance, is a real Ubuntu. You manage packages with `apt`, and `bash` is the shell interpreter. Everything works "normal". So normal, that you can even install and run Docker (which uses container virtualization: namespaces, cgroups and chroot) in it. In a nutshell, **the distro is Linux**. However, there are [ways to know you are running under WSL](#how-to-know-if-running-under-wsl).
 
 As I said before, things are "normal". Even so, there are differences between a distro running under WSL and a traditional Linux.
 
-One important difference is: WSL distros do not run SystemD, so you cannot have standard Linux services. If you install, for example, Postgres or Docker, you cannot manage them through `systemctl` and they will not start automatically when you enter the distro. You have to use the `service` utility to start and stop services. For the same reason, software update does not run automatically. Despite not having Linux services, one can use creativity and [start services when entering the WSL distro](#start-services-when-entering-the-distro).
+One important difference is: WSL distros do not run SystemD, so you cannot have standard Linux services. If you install, for example, Postgres or Docker, you cannot manage them through `systemctl` and they will not start automatically when you enter the distro. You use the `service` utility to start and stop them. For the same reason, software update does not run automatically. Despite not having Linux services, one can use creativity and [start services when entering the WSL distro](#start-services-when-entering-the-distro).
 
 Additionaly, WSL distros do not clean the `/tmp` directory. So, be careful. There is no such thing as a fresh `/tmp` on each boot. Keep an eye on your disk space.
 
