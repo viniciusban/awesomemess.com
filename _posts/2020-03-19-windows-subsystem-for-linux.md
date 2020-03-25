@@ -167,7 +167,7 @@ But as we see above, you should check for "microsoft" with all letters in lowerc
 $ uname -r | grep -i microsoft
 ```
 
-When you inspect the bash environment, you see some useful variables there:
+When you inspect the bash environment, you see some useful variables there. Use them at your disposal:
 
 ```
 $ env | grep WSL
@@ -176,6 +176,7 @@ WSL_DISTRO_NAME=Ubuntu-18.04
 WSL_GUEST_IP=172.31.132.120
 WSLENV=
 ```
+
 
 ## Start Services When Entering The Distro ##
 
