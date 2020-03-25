@@ -17,7 +17,7 @@ Some day I will write more about this. For the time being I will focus on the ha
 
 First of all, WSL **is not** Linux. WSL is an infrastructure to run Linux kernels under Windows as lightweight virtual machines. As its name suggests, it is a subsystem.
 
-The Ubuntu distribution for WSL, for instance, is a real Ubuntu. You manage packages with `apt`, and `bash` is the shell interpreter. Everything works "normal". So normal, that you can install and run Docker (which uses container virtualization: namespaces, cgroups and chroot) in it. However, there are [ways to know you are in WSL](#how-to-know-if-in-wsl).
+The Ubuntu distribution for WSL, for instance, is a real Ubuntu. You manage packages with `apt`, and `bash` is the shell interpreter. Everything works "normal". So normal, that you can install and run Docker (which uses container virtualization: namespaces, cgroups and chroot) in it. However, there are [ways to know you are in WSL](#how-to-know-if-running-under-wsl).
 
 As I said before, things are "normal". Even so, there are differences between a distro running under WSL and a traditional Linux.
 
@@ -148,3 +148,32 @@ $ echo $(tput sitm)it must appear in italics$(tput ritm)
 ```
 
 Finally, my personal choice is Mintty.
+
+
+## How To Know If Running Under WSL ##
+
+There are ways to know if you are running a Linux distro under WSL.
+
+[The official way](https://github.com/microsoft/WSL/issues/423#issuecomment-221627364) recommends looking for "Microsoft" in the kernel release:
+
+```
+$ uname -r
+4.19.84-microsoft-standard
+```
+
+But as we see above, you should check for "microsoft" with all letters in lowercase. Here is an example:
+
+```
+$ uname -r | grep -i microsoft
+```
+
+When you inspect the bash environment, you see some useful variables there:
+
+```
+$ env | grep WSL
+WSL_INTEROP=/run/WSL/18_interop
+WSL_DISTRO_NAME=Ubuntu-18.04
+WSL_GUEST_IP=172.31.132.120
+WSLENV=
+```
+
