@@ -2,7 +2,7 @@
 layout: post
 title: Recalling bash
 summary: This is a collection of commands, explanations, and bash tools
-featured-img: don-t-forget-1434063
+featured-img: bin-bash
 categories: [english]
 ---
 
