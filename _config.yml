@@ -22,7 +22,7 @@ navigation: # Navigation links
   - {name: 'Home', link: '/'}
 
 tagline: >
-  i have much more questions than answers
+  i have many more questions than answers
 
 hero_img: posts/iron-horse.jpg
 
