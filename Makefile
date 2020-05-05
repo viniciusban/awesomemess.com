@@ -14,3 +14,7 @@ gulp_img :
 serve :
 	@#help: Run the local server
 	bundle exec jekyll serve --watch
+
+build :
+	@#help: Build the final site
+	bundle exec jekyll build
