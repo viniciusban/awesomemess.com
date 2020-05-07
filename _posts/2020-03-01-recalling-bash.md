@@ -162,3 +162,33 @@ Start a sub-shell, execute some commands after `.bashrc` and keep the shell open
 ```
 $ bash --init-file <(echo '. ~/.bashrc;pwd;ls -a')
 ```
+
+
+## Does the file exist? ##
+
+Reference: <https://tldp.org/LDP/abs/html/fto.html>
+
+
+| File test operator | Explanation |
+|--------------------|-------------|
+| -a                 | Do not use it. Use -e instead. Read note below. |
+| -e                 | **Any** file. _Regular_ file, directory, device, socket, pipe, symlink... |
+| -f                 | _Regular_ file (not a directory or device file) exist. |
+| -d                 | Directory. |
+| -h, -L             | Symbolic link. |
+| -S                 | Socket. |
+| -r                 | **Any** file is readable by the user. |
+| -w                 | **Any** file is writeable by the user. |
+| -x                 | **Any** file is executable by the user. |
+| -O                 | User is the owner. |
+
+Test a file with `-a` is deprecated. It is not present in `$ man test` anymore. POSIX define `-a` as the "logical AND", as you can see it in examples below.
+
+Examples checking for symlinks:
+
+```
+[ -h "$filename" -a -f "$filename" ] && echo 'link to a regular file'
+[ -h "$filename" -a -d "$filename" ] && echo 'link to a directory'
+[ -h "$filename" -a -e "$filename" ] && echo 'link to any file'
+[ -h "$filename" -a ! -e "$filename" ] && echo 'broken link'
+```
