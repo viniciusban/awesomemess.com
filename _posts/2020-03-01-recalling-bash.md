@@ -187,8 +187,8 @@ Test a file with `-a` is deprecated. It is not present in `$ man test` anymore. 
 Examples checking for symlinks:
 
 ```
-[ -h "$filename" -a -f "$filename" ] && echo 'link to a regular file'
-[ -h "$filename" -a -d "$filename" ] && echo 'link to a directory'
-[ -h "$filename" -a -e "$filename" ] && echo 'link to any file'
-[ -h "$filename" -a ! -e "$filename" ] && echo 'broken link'
+[ -L "$filename" -a -f "$filename" ] && echo 'link to a regular file'
+[ -L "$filename" -a -d "$filename" ] && echo 'link to a directory'
+[ -L "$filename" -a -e "$filename" ] && echo 'link to any file'
+[ -L "$filename" -a ! -e "$filename" ] && echo 'broken link'
 ```
