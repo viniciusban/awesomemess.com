@@ -133,7 +133,7 @@ The basic Windows' `cmd` works, but I recommend you the new [Windows Terminal](h
 
 You can install [Windows Terminal](https://github.com/microsoft/terminal) from the Microsoft Store. It's quite usable, but not user friendly to customize colours and font.
 
-I usually go with [white background](https://github.com/viniciusban/vim-almostmonochrome) and [IBM Plex Mono](https://www.ibm.com/plex/) ([Github repo](https://github.com/IBM/plex)) or [Fira Mono](https://mozilla.github.io/Fira/) ([Github repo](https://github.com/mozilla/Fira)) fonts, so I need some easyness on this.
+I usually go with custom colors and [IBM Plex Mono](https://www.ibm.com/plex/) ([Github repo](https://github.com/IBM/plex)) or [Fira Mono](https://mozilla.github.io/Fira/) ([Github repo](https://github.com/mozilla/Fira)) fonts, so I need some easyness on this.
 
 You can see below a small comparison I made on important features for me:
 
