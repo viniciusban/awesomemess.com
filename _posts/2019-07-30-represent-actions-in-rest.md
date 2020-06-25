@@ -40,10 +40,10 @@ Let us examine a few examples below:
 |  1 | GET /filter_users/?status=active&page=3 | GET /users/?status=active&page=3 |
 |  2 | GET /get_user/?id=bob                   | GET /users/bob/ |
 |  3 | POST /create_user/                      | POST /users/ |
-|  4 | POST /update_product/?id=18             | PUT /products/18/ |
-|  5 | POST /delete_item/?id=472               | DELETE /items/472/ |
-|  6 | POST /transfer_money/?from=76354gy      |  |
-|  7 | POST /change_password/?user=bob         |  |
+|  4 | POST /update_user/?id=18                | PUT /users/18/ |
+|  5 | POST /delete_user/?id=18                | DELETE /users/18/ |
+|  6 | POST /deactivate_user/?id=18            |  |
+|  7 | POST /change_password/?id=18            |  |
 
 
 Briefly, RPC and REST endpoints follow 3 rules, each one following its own path:
@@ -74,19 +74,26 @@ problem" raises a question about how to perform operations on a virtual machine
 using a REST API. How to map "start vm", "shutdown vm" (and so on) actions in a
 REST style, since they are essentially actions, not resources?
 
-Using the `/transfer_money/` endpoint (example 6) as a case, we see some alternatives to translate it into REST:
+Using the `/deactivate_user/` endpoint (example 6) as a case, we see some alternatives to translate it into REST:
 
-1. Create a transaction on an account: `POST /accounts/76354gy/transactions/`;
-2. Include the verb in URI: `POST /accounts/76354gy/transfer_money/`;
-3. Include the verb in query string: `POST /accounts/76354gy/?action=transfer_money`.
+1. Create a new deactivation for a user: `POST /users/18/deactivations/` (not so nice, but RESTful);
+2. Hide our intention into the payload: `PATCH /users/18/` (RESTful, but not clear);
+3. Include the verb in the URI: `POST /users/18/deactivate/` (not RESTful, but clear);
+4. Include the verb in the query string: `POST /users/18/?action=deactivate` (not RESTful, but clear).
 
-Things get worse when we analize the `/change_password/` endpoint (example 7). Should we have `POST /users/bob/change_password/` or `PUT /users/bob/password/`? Note that both endpoints should receive current password for validation, but it will not be persisted.
+There is no single answer. Remember that usually business processes come along with additional side effects. For instance, deactivating a user could imply in changing their ownership over some data. So, it is not only a matter of "updating a field".
 
-Like it or not, REST took the world (despite GraphQL momentum in the last years) and we need to perform business actions in REST-based APIs.
+Things get complicated, too, when we analize the `/change_password/` endpoint (example 7). This common action is peculiar: it receives a field that is not part of the object, i.e, the current password. The object has only the "password" field, not the "current_password". Keeping it in mind, which endpoint should we use for this?
 
-So, how to represent business actions using REST?
+1. `POST /users/18/passwords/` implies in adding a password to the user (RESTful, but not good);
+2. `PATCH /users/18/password/` is more or less clear what it does (not RESTful, but better?);
+3. `POST /users/18/change_password/` shows the business action in the URI (not RESTful).
 
-I will not give an answer, but we will see what the bigger players do. Reading [Twitter](https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference), [Spotify](https://developer.spotify.com/documentation/web-api/reference/playlists/) and [LinkedIn](https://docs.microsoft.com/en-gb/linkedin/shared/api-guide/concepts/methods?context=linkedin/context) documentation we realize there is no "one size fits all" solution to this case.
+Again, there is not a clear winner.
+
+Like it or not, REST took the world (despite GraphQL momentum in the last years) and we need to perform business actions in REST-based APIs. So, how to represent business actions using REST? I will not give you an answer, but we will check what the big players are doing.
+
+[Twitter](https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference), [Spotify](https://developer.spotify.com/documentation/web-api/reference/playlists/) and [LinkedIn](https://docs.microsoft.com/en-gb/linkedin/shared/api-guide/concepts/methods?context=linkedin/context) documentation show that there is no "one size fits all" solution to this case.
 
 Spotify looks more RESTful, but they do not have too much "procedural" endpoints available.
 
