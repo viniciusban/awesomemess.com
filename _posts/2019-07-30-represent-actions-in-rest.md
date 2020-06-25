@@ -41,8 +41,8 @@ Let's examine a few examples below:
 |:--:|-----------------------------------------|---------------|
 |  1 | GET /filter_users/?status=active&page=3 | GET /users/?status=active&page=3 |
 |  2 | GET /get_user/?id=bob                   | GET /users/bob/ |
-|  3 | POST /create_user/                      | PUT  /users/ |
-|  4 | POST /update_product/?id=18             | POST /products/18/ |
+|  3 | POST /create_user/                      | POST  /users/ |
+|  4 | POST /update_product/?id=18             | PUT /products/18/ |
 |  5 | POST /delete_item/?id=472               | DELETE /items/472/ |
 |  6 | POST /transfer_money/?from=76354gy      |  |
 |  7 | POST /change_password/?user=bob         |  |
@@ -56,12 +56,9 @@ Briefly, RPC and REST endpoints follow 3 rules, each one with its own path:
 
 - Arguments: in RPC arguments go with query string to allow the execution of the action. In REST they identify a resource and — exactly because of that — are part of the URI. But auxiliary arguments are kept in the query string.
 
-Some people argue the `PUT /users/` endpoint (example 3) should use the POST
-verb because PUT must receive a list of users and replace the complete
-collection. I go with the example, but this is only the first controversy.
-
-The real discussion are on examples 6 and 7. I didn't write them for REST on
-purpose. That's what we're going to discuss from now on.
+Despite some controversy about `PUT` or `POST` for object creation, the real
+discussion is on examples 6 and 7. I didn't write them in the REST column on
+purpose. That's what we're going to focus from now on.
 
 RPC-based API's are good to perform transactions (a.k.a, processes or actions)
 over data. REST-based style are designed to represent a domain and perform CRUD
@@ -81,9 +78,9 @@ REST style, since they are essentially actions, not resources?
 
 Taking the `/transfer_money/` endpoint (example 6) as a case, we see some alternatives to transform it in REST:
 
-1. Create a transaction on an account: `PUT /accounts/76354gy/transactions/`;
-2. Include the verb in URI: `PUT /accounts/76354gy/transfer_money/`;
-3. Include the verb in query string: `PUT /accounts/76354gy/?action=transfer_money`.
+1. Create a transaction on an account: `POST /accounts/76354gy/transactions/`;
+2. Include the verb in URI: `POST /accounts/76354gy/transfer_money/`;
+3. Include the verb in query string: `POST /accounts/76354gy/?action=transfer_money`.
 
 Things get worse when we analize the `/change_password/` endpoint (example 7). Should we have `POST /users/bob/change_password/` or `PUT /users/bob/password/`? Note that both endpoints should receive current password to make validation, but it won't be persisted.
 
