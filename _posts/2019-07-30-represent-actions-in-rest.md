@@ -86,7 +86,7 @@ There is no single answer. Remember that usually business processes come along w
 Things get complicated, too, when we analize the `/change_password/` endpoint (example 7). This common action is peculiar: it receives a field that is not part of the object, i.e, the current password. The object has only the "password" field, not the "current_password". Keeping it in mind, which endpoint should we use for this?
 
 1. `POST /users/18/passwords/` implies in adding a password to the user (RESTful, but not good);
-2. `PATCH /users/18/password/` is more or less clear what it does (RESTful, but better?);
+2. `PUT /users/18/password/` is more or less clear what it does (RESTful, but better?);
 3. `POST /users/18/change_password/` shows the business action in the URI (not RESTful).
 
 Again, there is not a clear winner.
