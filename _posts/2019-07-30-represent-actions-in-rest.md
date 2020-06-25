@@ -26,10 +26,10 @@ authenticate a user. We are talking about endpoint names and their relation with
 business actions.
 
 So, we will make a quick comparison between RPC and REST styles to establish a
-foundation and explore some scenarios. They have some key similarities. They both:
+starting point and explore some scenarios. They have some key similarities:
 
-- Run over HTTP;
-- Comply with one golden rule of HTTP verbs: `GET` do not change application
+- The both run over HTTP;
+- Comply with the golden rule of HTTP verbs: `GET` do not change application
   state;
 - Embed data to update state into the payload (request body).
 
@@ -46,7 +46,7 @@ Let us examine a few examples below:
 |  7 | POST /change_password/?user=bob         |  |
 
 
-Briefly, RPC and REST endpoints follow 3 rules, each one with its own path:
+Briefly, RPC and REST endpoints follow 3 rules, each one following its own path:
 
 - Representation: RPC represents business actions. REST represents resources, not actions.
 
@@ -55,7 +55,7 @@ Briefly, RPC and REST endpoints follow 3 rules, each one with its own path:
 - Arguments: in RPC arguments go with query string to allow the execution of the action. In REST they identify a resource and — exactly because of that — are part of the URI. But auxiliary arguments are kept in the query string.
 
 Despite some controversy about `PUT` or `POST` for object creation, the real
-discussion is on examples 6 and 7. I did not write them in the REST column on
+discussion is on examples 6 and 7. I did not write their REST version on
 purpose. That is what we are going to focus from now on.
 
 RPC-based APIs are good to perform transactions (a.k.a, processes or actions)
@@ -63,7 +63,7 @@ over data. REST-based style are designed to represent a domain and perform CRUD
 operations on it, but when we need to map business actions to REST
 representations, people disagree.
 
-I selected 2 discussions about an ancient "problem" on REST APIs, the Virtual
+I picked 2 reasonings about an ancient "problem" on REST APIs, the Virtual
 Machine problem:
 
 - [RESTful Casuistry](https://www.tbray.org/ongoing/When/200x/2009/03/20/Rest-Casuistry)
@@ -74,7 +74,7 @@ problem" raises a question about how to perform operations on a virtual machine
 using a REST API. How to map "start vm", "shutdown vm" (and so on) actions in a
 REST style, since they are essentially actions, not resources?
 
-Taking the `/transfer_money/` endpoint (example 6) as a case, we see some alternatives to transform it in REST:
+Using the `/transfer_money/` endpoint (example 6) as a case, we see some alternatives to translate it into REST:
 
 1. Create a transaction on an account: `POST /accounts/76354gy/transactions/`;
 2. Include the verb in URI: `POST /accounts/76354gy/transfer_money/`;
@@ -84,9 +84,9 @@ Things get worse when we analize the `/change_password/` endpoint (example 7). S
 
 Like it or not, REST took the world (despite GraphQL momentum in the last years) and we need to perform business actions in REST-based APIs.
 
-Show, how to represent business actions using REST?
+So, how to represent business actions using REST?
 
-I usually like to see what the bigger players do. Reading [Twitter](https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference), [Spotify](https://developer.spotify.com/documentation/web-api/reference/playlists/) and [LinkedIn](https://docs.microsoft.com/en-gb/linkedin/shared/api-guide/concepts/methods?context=linkedin/context) documentation we realize there is no "one size fits all" solution to this case.
+I will not give an answer, but we will see what the bigger players do. Reading [Twitter](https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference), [Spotify](https://developer.spotify.com/documentation/web-api/reference/playlists/) and [LinkedIn](https://docs.microsoft.com/en-gb/linkedin/shared/api-guide/concepts/methods?context=linkedin/context) documentation we realize there is no "one size fits all" solution to this case.
 
 Spotify looks more RESTful, but they do not have too much "procedural" endpoints available.
 
@@ -112,7 +112,7 @@ It seems Twitter engineers know this message and, yes, you can break the rules. 
 
 One lesson I learned is: do not pick a side blindly.
 
-When someone asks you if your API is RESTful you may answer, likewise almost everything in life, "it depends" and start a conversation, not a war.
+When someone asks you if your API is RESTful you may answer "it depends", and start a conversation instead a war.
 
 For further reference, I selected some material you can or cannot agree with. Read them up to have your own opinion:
 
