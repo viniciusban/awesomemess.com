@@ -91,7 +91,7 @@ Things get complicated, too, when we analize the `/change_password/` endpoint (e
 
 Again, there is not a clear winner.
 
-Like it or not, REST took the world (despite GraphQL momentum in the last years) and we need to perform business actions in REST-based APIs. So, how to represent business actions using REST? I will not give you an answer, but we will check what the big players are doing.
+Like it or not, REST took the world and we need to perform business actions in REST-based APIs. So, how to represent business actions using REST? I will not give you an answer, but we will check what the big players are doing.
 
 [Twitter](https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference), [Spotify](https://developer.spotify.com/documentation/web-api/reference/playlists/) and [LinkedIn](https://docs.microsoft.com/en-gb/linkedin/shared/api-guide/concepts/methods?context=linkedin/context) documentation show that there is no "one size fits all" solution to this case.
 
