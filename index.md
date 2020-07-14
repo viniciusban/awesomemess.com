@@ -18,7 +18,7 @@ taglines:
   - The worst efficiency is to do well the wrong thing
   - There is always the good reason and the actual reason
   - Chase your dream, not your competition
-  - I am a slow walker, but i never walk back — Abraham Lincoln
+  - I am a slow walker, but I never walk back — Abraham Lincoln
   - Only the educated are free — Epictetus
   - The way to get started is to quit talking and begin doing — Walt Disney
   - It is our choices, that show what we truly are, far more than our abilities — J. K Rowling
@@ -27,7 +27,7 @@ taglines:
   - You do not grow when you are comfortable
   - If we knew what we were doing, it would not be called research, would it? — A. Einstein
   - Baby steps, baby
-  - Forget the mistake. Remember the lesson
+  - Remember your mistakes, but do not dare to forget the lessons learned
   - The quality of your thinking determines the quality of your life — A. R. Bernard
   - Have your own opinion, but listen to the others
   - Why so many big guys in the programming industry are using Ruby?
@@ -35,6 +35,7 @@ taglines:
   - First aim, then shoot
   - History started before Google IPO — Niall Ferguson
   - Just because I shouldn\'t, it doesn\'t mean I can\'t
+  - Just because I can, it doesn\'t mean I should
   - The first step of any project is to grossly underestimate its complexity and difficulty — Nicoll Hunt
   - Before software can be reusable it first has to be usable — Ralph Johnson
   - I call my staging environment \'Theory\' on account of how many things work in theory, but not in production — Corey Quinn
@@ -67,7 +68,7 @@ taglines:
   - Telling a programmer there\'s already a library to do X is like telling a songwriter there\'s already a song about love — Pete Cordell
   - You haven\'t mastered a tool until you understand when it should not be used — Kelsey Hightower
   - Walking on water and developing software from a specification are easy if both are frozen — Edward V Berard
-  - Drink water
+  - Drink more water
   - It is better to be silent and thought a fool, than to speak and remove all doubt — Silvan Engel
   - An evolving system increases its complexity unless work is done to reduce it — Meir Lehman
   - It turns out that style matters in programming for the same reason that it matters in writing. It makes for better reading — Douglas Crockford
