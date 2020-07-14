@@ -77,7 +77,6 @@ This `Makefile` is a good starting point because:
 All commands in a `Makefile` are executed in its own subshell. So, if you need to set and environment to run a command, you should concatenate all commands in a sigle line, like this:
 
 ```
-# Makefile
 target :
 	cd /project/root/directory && \
 		source ./.virtualenv/bin/activate && \
