@@ -207,7 +207,7 @@ UUIDs can be generated with:
 $ uuidgen
 ```
 
-Really random strings come from `/dev/urandom` as we can see in examples below.
+True random strings come from `/dev/urandom` as we can see in examples below.
 
 3-char length string with only letters and digits:
 
