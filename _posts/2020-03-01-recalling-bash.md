@@ -191,3 +191,32 @@ Examples checking for symlinks:
 [ -L "$filename" -a -e "$filename" ] && echo 'link to any file'
 [ -L "$filename" -a ! -e "$filename" ] && echo 'broken link'
 ```
+
+## Unique and/or random numbers and strings
+
+The simplest option is to generate random numbers with a bash variable:
+
+
+```
+$ echo $RANDOM
+```
+
+UUIDs can be generated with:
+
+```
+$ uuidgen
+```
+
+Really random strings come from `/dev/urandom` as we can see in examples below.
+
+3-char length string with only letters and digits:
+
+```
+$ base64 /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 3
+```
+
+5 different 20-char strings with letters, digits and the underscore:
+
+```
+$ base64 /dev/urandom | tr -dc 'a-zA-Z0-9_' | fold -w 20 | head -n 5
+```
