@@ -215,8 +215,8 @@ Really random strings come from `/dev/urandom` as we can see in examples below.
 $ base64 /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 3
 ```
 
-5 different 20-char strings with letters, digits and the underscore:
+5 different 20-char strings with letters, digits and some special characters:
 
 ```
-$ base64 /dev/urandom | tr -dc 'a-zA-Z0-9_' | fold -w 20 | head -n 5
+$ cat /dev/urandom | tr -dc 'a-zA-Z0-9_@*' | fold -w 20 | head -n 5
 ```
