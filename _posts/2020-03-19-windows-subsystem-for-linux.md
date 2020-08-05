@@ -232,3 +232,55 @@ This approach will start only one ssh agent for a distro. If you open another te
 These two solutions are only examples of how services could be started in a Linux distro running under WSL. You have all Linux flexibility to come up with your own solution, for your specific scenario.
 
 There are also solutions to start services under WSL when your Windows host boots up. You can find a lot of them googling.
+
+
+## Memory and disk reclaim
+
+Some users had reported excessive memory usage by WSL 2. There are two ways to circumvent this problem.
+
+The first one is limiting the amount of memory WSL 2 can use. You must create a file called `.wslconfig` at the `%UserProfile%\.wslconfig` folder in Windows:
+
+
+```
+[wsl2]
+memory=6GB
+```
+
+Regardless how much RAM you have in your computer, WSL 2 will not use more than the configured amount. Configure it according to your physical memory. You can see all possible configurations in this [release note](https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-189451894e).
+
+Source: <https://github.com/microsoft/WSL/issues/4166#issuecomment-526725261>
+
+The second option is reclaiming WSL 2 VM's free memory. Windows and WSL 2 work together to recall unused memory when it is actually unused.
+
+It happens that modern operating systems use the remaining available memory that should be unused as a cache to improve performance. Thus, let's say your Linux WSL 2 instance is using only 2GB and it detects more 4GB free memory. It will use it as a cache. So, from now on, the Windows host does not see that memory as available and it cannot reclaim it automatically. How to solve that? Create an alias and use it when you know it is helpful:
+
+```
+$ alias drop_cache="sudo sh -c \"echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'\""
+```
+
+Source: <https://github.com/microsoft/WSL/issues/4166#issuecomment-662915558>
+
+Now, moving from memory to disk, there is a known problem of WSL 2 not recovering unused disk space from its volume. Suppose you downloaded a 5GB file into your WSL 2 machine and deleted it. Windows does not see that extra 5GB space again, unless you command it.
+
+To accomplish it, open a Powershell terminal with Administrator privileges and type the following:
+
+
+```
+### Optimize (shrink) WSL 2 .vhdx
+## Must be run in PowerShell as Administrator user
+# DistroFolder found at: $env:LOCALAPPDATA\Packages\
+# Examples:
+#   CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc
+#   CanonicalGroupLimited.Ubuntu20.04onWindows_79rhkp1fndgsc
+
+# Enter into folder with your WSL 2 virtual disk
+cd $env:LOCALAPPDATA\Packages\REPLACE_ME_WITH_TARGET_DISTRO_FOLDERNAME\LocalState\
+
+# Shut all WSL 2 instances down
+wsl --shutdown
+
+# Shrink the disk
+optimize-vhd -Path .\ext4.vhdx -Mode full
+```
+
+Source: <https://github.com/microsoft/WSL/issues/4699#issuecomment-635673427>
