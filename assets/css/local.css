@@ -1,3 +1,13 @@
+html {font-size:16px;}
 h2 {margin-top:40px;}
+p {margin-top:2rem;margin-bottom:0;}
+pre {margin-top:1rem;margin-bottom:2rem;padding:1rem;}
+pre > code {line-height:1.5rem;}
+table {margin-top:2rem;font-size:1rem;}
+ul {margin-top:.8rem;margin-bottom:2rem;}
+
+.site {font-family: Georgia,serif;}
 
 .homepage_title {font-weight:lighter;font-size:2rem;}
+
+.post-content {max-width:42rem;font-size:1.2rem;line-height:1.75;}
