@@ -2,6 +2,7 @@
 layout: post
 title: How to run tests with pytest
 summary: This is a self reminder about pytest invocation
+slug: run-pytest
 featured-img: don-t-forget-1434063
 categories: [english]
 ---
