@@ -16,7 +16,7 @@ taglines:
   - The only way to do a thing, is to do it
   - Don\'t do well what doesn\'t need to be done
   - The worst efficiency is to do well the wrong thing
-  - There is always the good reason and the actual reason
+  - There is always the good reason, and the actual reason
   - Chase your dream, not your competition
   - I am a slow walker, but I never walk back — Abraham Lincoln
   - Only the educated are free — Epictetus
@@ -30,15 +30,13 @@ taglines:
   - Remember your mistakes, but do not dare to forget the lessons learned
   - The quality of your thinking determines the quality of your life — A. R. Bernard
   - Have your own opinion, but listen to the others
-  - Why so many big guys in the programming industry are using Ruby?
   - Every accomplishment starts with the decision to try — J. F. Kennedy
   - First aim, then shoot
-  - History started before Google IPO — Niall Ferguson
   - Just because I shouldn\'t, it doesn\'t mean I can\'t
   - Just because I can, it doesn\'t mean I should
   - The first step of any project is to grossly underestimate its complexity and difficulty — Nicoll Hunt
   - Before software can be reusable it first has to be usable — Ralph Johnson
-  - I call my staging environment \'Theory\' on account of how many things work in theory, but not in production — Corey Quinn
+  - I call my staging environment \"theory\" on account of how many things work in theory, but not in production — Corey Quinn
   - Good software, like wine, takes time — Joel Spolsky
   - The function of good software is to make the complex appear to be simple — Grady Booch
   - Testing can show the presence of errors, but not their absence — Edsger W. Dijkstra
@@ -72,6 +70,10 @@ taglines:
   - It is better to be silent and thought a fool, than to speak and remove all doubt — Silvan Engel
   - An evolving system increases its complexity unless work is done to reduce it — Meir Lehman
   - It turns out that style matters in programming for the same reason that it matters in writing. It makes for better reading — Douglas Crockford
-  - Software being \"Done\" is like lawn being \"Mowed\" — Jim Benson
+  - Software being \"done\" is like lawn being \"mowed\" — Jim Benson
+  - The great aim of education is not knowledge, but action — Herbert Spencer
+  - I used to believe that everything I did had to be 100 percent original — Derek Sivers
+  - Success comes from doing, not declaring — Derek Sivers
+  - Do what must be done
 ---
 
