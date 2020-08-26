@@ -2,6 +2,7 @@
 layout: post
 title: O jeito certo de ler um arquivo em Python
 summary: Existem muitos exemplos te ensinando a ler um arquivo em Python. O que há de errado com eles?
+slug: ler-arquivo-em-python
 featured-img: blur-children-class-448877
 categories: [pt-br]
 lang: pt_BR

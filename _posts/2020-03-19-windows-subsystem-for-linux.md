@@ -2,6 +2,7 @@
 layout: post
 title: The Windows Subsystem For Linux
 summary: The complete change in your desktop
+slug: wsl
 featured-img: love-friends
 categories: [english]
 ---

@@ -2,6 +2,7 @@
 layout: post
 title: A Pythonic approach to produce test data
 summary: Things can become complicated when generating test data, but Python helps us achieve a very simple way.
+slug: test-factories
 featured-img: blue-sky-chimney-clouds-208714
 categories: [english]
 tags:

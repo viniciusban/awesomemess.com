@@ -2,6 +2,7 @@
 layout: post
 title: Do's and don'ts about roles and permissions
 summary: How to decide what to do based on current user?
+slug: roles-and-permissions
 featured-img: key
 categories: [english]
 ---

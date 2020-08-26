@@ -1,7 +1,8 @@
 ---
 layout: post
-title: I must not use verbs in RESTful URIs. Or should I?
+title: Why not use actions in RESTful URIs?
 summary: How to represent business actions using REST.
+slug: actions-in-rest
 featured-img: hamlet
 categories: [english]
 ---

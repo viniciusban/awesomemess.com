@@ -2,6 +2,7 @@
 layout: post
 title: Fatherly Advice To New Programmers
 summary: If you are newly embarking on the journey to become a programmer, this advice is for you.
+slug: fatherly-advice
 featured-img: novice-people
 categories: [english]
 ---

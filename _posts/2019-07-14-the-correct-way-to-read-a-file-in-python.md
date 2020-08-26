@@ -2,6 +2,7 @@
 layout: post
 title: The correct way to read a file in Python
 summary: There are lots of examples teaching you how to read a file in Python. What are they missing?
+slug: read-file-in-python
 featured-img: blur-children-class-448877
 categories: [english]
 ---
