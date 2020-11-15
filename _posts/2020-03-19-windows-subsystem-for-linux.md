@@ -82,6 +82,14 @@ Import the `.tar.gz` file to transform it into a working distro. I recommend you
 
 That's all. NewDistro is installed and you can use it right away.
 
+
+Natively, `wsl` does not tell us where the distro is installed. To know it and to have access to a lot of additional features, [LxRunOffline](https://github.com/DDoSolitary/LxRunOffline) becomes handy. You install it, and:
+
+```
+> LxRunOffline.exe get-dir -n MyDistro
+C:\my-wsl-distros\new-distro\
+```
+
 Usually, these images come only with the root user enabled. Follow the instructions below to configure a default user `john`, to avoid using `root` directly:
 
 ```
