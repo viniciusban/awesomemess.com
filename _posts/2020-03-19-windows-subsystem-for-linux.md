@@ -125,15 +125,24 @@ Uninstalling a distro is as easy as it was to install it:
 
 ## Interoperability between Windows and Linux ##
 
-You can start a service inside WSL and access it from Windows, transparently. For example, you start nginx inside WSL using the port 8000, open a browser in Windows and access `http://127.0.0.1:8000` to see the web page.
+You can start a service inside WSL and access it from Windows, transparently. For example, you start nginx inside WSL using the port 8000, open a browser in Windows and access `http://127.0.0.1:8000` (aka, localhost:8000) to see the web page.
 
-Another very useful scenario is: if you have two (or more) WSL distros running, one can access the other and Windows can access both as well. Just use `127.0.0.1` (localhost) and the corresponding port everywhere. It is transparent, with zero configuration.
+Another useful scenario is: if you have two (or more) WSL distros running, one can access the other and Windows can access both as well. Just use `127.0.0.1` (localhost) and the corresponding port everywhere. It is transparent, with zero configuration.
 
 Windows programs can access the distro's filesystem. Try the following command from your distro, to open the Windows Explorer for your current directory:
 
 ```
 $ explorer.exe .
 ```
+
+You can access Windows folders from inside WSL. The C: drive is mounted as `/mnt/c/`. If you want to access a specific folder using the WSL command line, let's say `C:\Windows\System32` you can use:
+
+```
+$ cd /mnt/c/Windows/System32
+$ ls *.dll
+```
+
+Note the mixed case. In Linux it is important, as usual.
 
 
 ## Which terminal may I use with WSL? ##
@@ -297,20 +306,26 @@ Source: <https://github.com/microsoft/WSL/issues/4699#issuecomment-635673427>
 
 ## Permissions for files outside WSL
 
-One problem of WSL is its disk size. According to the [official documentation](https://docs.microsoft.com/en-us/windows/wsl/compare-versions#expanding-the-size-of-your-wsl-2-virtual-hard-disk), the default maximum disk size is 256GB.
+As we saw in the section above, the virtual disk thas does not shrink automatically is one problem in WSL. Thus, you should avoid saving large files inside it as much as you can.
 
-One procedure to avoid the WSL virtual disk reaching its limit, is allocating files out of WSL, i.e, in Windows folders. The drive C: is mounted as the `/mnt/c` directory inside WSL. Thus, you can access any file or Windows folder following the filesystem hierarchy. In fact, not any file/folder. Windows has its own access control policy, which is different from Linux's.
+One workaround is allocating files outside WSL, i.e, in Windows folders. As all Windows' files and folders can be accessed through `/mnt/c`, you could save your big file into the `Downloads` folder and access it from inside WSL. Or you can allocate your Docker volumes under `/mnt/c/docker_volumes`. People say performance could be a bottleneck, but I am using it for some time now without problems.
 
-It is very useful, for example, when you want to save docker container files outside WSL. Sometimes they are temporary and deleted just after the container is shut down. If you use docker as part of your development process, this helps avoiding the disk increase problem. I am successfuly using it for some time now.
+But nothing runs smooth all the time. I faced a problem when allocating a Postgres volume outside WSL. Postgres needs specific permissions for its `PGDATA` folder.
 
-By default, you have full access to files outside WSL, aka `chmod 777`. Usually it is not a problem, but sometimes we need to control the access policy for them. For instance, when you want to save Postgres data in a folder outside WSL.
+By default, WSL cannot change permissions for a file/directory outside its boundaries. All entries have the `chmod 777` permission set.
 
-To solve it, you must create the `/etc/wsl.conf` file inside the WSL distro with this contents:
+To overcome this limitation you must create the `/etc/wsl.conf` file inside the WSL distro with this contents:
 
 ```
 [automount]
 options = "metadata"
 ```
 
-Shutdown all WSL distros. The next time you start that distro with the `/etc/wsl.conf` file, you can `chmod` a file or folder outside WSL.
+Then, shutdown your WSL distro from Windows Powershell using:
+
+````
+> wsl --shutdown
+```
+
+The next time you start your distro, you will be able to `chmod` a file or folder outside WSL boundaries and allocate your Postgres `PGDATA` there.
 
