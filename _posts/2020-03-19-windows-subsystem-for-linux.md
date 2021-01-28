@@ -293,3 +293,24 @@ optimize-vhd -Path .\ext4.vhdx -Mode full
 ```
 
 Source: <https://github.com/microsoft/WSL/issues/4699#issuecomment-635673427>
+
+
+## Permissions for files outside WSL
+
+One problem of WSL is its disk size. According to the [official documentation](https://docs.microsoft.com/en-us/windows/wsl/compare-versions#expanding-the-size-of-your-wsl-2-virtual-hard-disk), the default maximum disk size is 256GB.
+
+One procedure to avoid the WSL virtual disk reaching its limit, is allocating files out of WSL, i.e, in Windows folders. The drive C: is mounted as the `/mnt/c` directory inside WSL. Thus, you can access any file or Windows folder following the filesystem hierarchy. In fact, not any file/folder. Windows has its own access control policy, which is different from Linux's.
+
+It is very useful, for example, when you want to save docker container files outside WSL. Sometimes they are temporary and deleted just after the container is shut down. If you use docker as part of your development process, this helps avoiding the disk increase problem. I am successfuly using it for some time now.
+
+By default, you have full access to files outside WSL, aka `chmod 777`. Usually it is not a problem, but sometimes we need to control the access policy for them. For instance, when you want to save Postgres data in a folder outside WSL.
+
+To solve it, you must create the `/etc/wsl.conf` file inside the WSL distro with this contents:
+
+```
+[automount]
+options = "metadata"
+```
+
+Shutdown all WSL distros. The next time you start that distro with the `/etc/wsl.conf` file, you can `chmod` a file or folder outside WSL.
+
